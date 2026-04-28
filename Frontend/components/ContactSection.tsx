@@ -10,7 +10,7 @@ import { Send } from "lucide-react";
 
 export const ContactSection = () => {
   return (
-    <section id="contact" className="section-padding bg-muted/30">
+    <section id="contact" className="section-padding bg-gray/100 bg-muted/30">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left */}

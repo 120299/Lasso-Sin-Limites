@@ -7,7 +7,7 @@ import { phoneMockup1, phoneMockup2, phoneMockup3 } from "@/assets";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden gradient-hero">
+    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden gradiente-mixto">
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
         <div className="absolute top-20 right-20 size-72 rounded-full bg-primary/20 blur-3xl" />
@@ -29,7 +29,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.1 }}
               className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full"
             >
-              8 Años de Experiencia y Ejecución Directa
+              8 Años de Experiencia
             </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -37,15 +37,17 @@ export const HeroSection = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
             >
-              Desarrollamos Tu App y {""}
-              <span className="text-gradient">Gestionamos Todo el Resto</span>
+              Desarrollamos tu App y {""}
+              <span className="text-gradient">
+                te asesoramos en todo momento.
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="section-description md:text-xl max-w-xl mx-auto lg:mx-0"
+              className="section-description md:text-xl max-w-xl mx-auto lg:mx-0 text-justify"
             >
               Expertos en aplicaciones móviles y plataformas web a medida.
               Además, cubrimos el soporte técnico, diseño y merchandising que tu

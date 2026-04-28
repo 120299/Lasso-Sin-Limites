@@ -25,37 +25,91 @@ import {
   LayoutDashboard,
   Repeat,
   ShieldCheck,
+  Code2,
+  Layers,
 } from "lucide-react";
 
-export const SERVICES_DATA = [
+// Interfaz para TypeScript
+export interface ServiceItem {
+  id: number;
+  title: string;
+  description: string;
+  video: string; // URL del video .webm o .mp4
+  image: string; // Imagen de respaldo (poster)
+  link: string;
+}
+export const SERVICES_DATA: ServiceItem[] = [
   {
-    id: "desarrollo",
-    title: "Desarrollo High-End",
-    description: "Interfaces ultra rápidas con arquitectura modular escalable.",
-    icon: Code, // Solo la referencia
+    id: 1,
+    title: "Experiencias Inmersivas",
+    description:
+      "Desarrollamos entornos digitales que difuminan la línea entre lo físico y lo virtual.",
+    // Video de partículas oscuras en movimiento
+    video:
+      "https://media.magnific.com/home/relaunch/media/useCases/filmmaking.webm",
     image:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800&auto=format&fit=crop",
-    link: "#desarrollo",
+      "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800",
+    link: "/servicios/inmersivo",
   },
   {
-    id: "ia",
-    title: "Integración de IA",
+    id: 2,
+    title: "Data Intelligence",
     description:
-      "Automatizamos procesos complejos mediante modelos de aprendizaje.",
-    icon: Cpu, // Solo la referencia
+      "Transformamos flujos de datos complejos en decisiones estratégicas mediante IA avanzada.",
+    // Video de conexiones de red/nodos
+    video:
+      "https://media.magnific.com/home/relaunch/media/useCases/filmmaking.webm",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop",
-    link: "#ia",
+      "https://images.unsplash.com/photo-1509228468518-180dd4805a5f?q=80&w=800",
+    link: "/servicios/datos",
   },
   {
-    id: "global",
-    title: "Expansión Digital",
+    id: 3,
+    title: "Cybercore Security",
     description:
-      "Llevamos tu marca a mercados internacionales con SEO localizado.",
-    icon: Globe, // Solo la referencia
+      "Protección proactiva diseñada para resistir las amenazas digitales más sofisticadas del futuro.",
+    // Video de túnel tecnológico oscuro
+    video:
+      "https://assets.mixkit.co/videos/preview/mixkit-motion-graphics-of-a-technological-tunnel-with-blue-lights-42566-large.mp4",
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
-    link: "#global",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800",
+    link: "/servicios/seguridad",
+  },
+  {
+    id: 4,
+    title: "Ecosistemas Cloud",
+    description:
+      "Arquitecturas escalables y resilientes que forman la columna vertebral de tu negocio global.",
+    // Video de nubes abstractas de datos
+    video:
+      "https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-of-white-particles-on-a-black-background-42750-large.mp4",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
+    link: "/servicios/cloud",
+  },
+  {
+    id: 5,
+    title: "Neural Branding",
+    description:
+      "Identidades visuales creadas con algoritmos para conectar profundamente con el usuario.",
+    // Video de fluidos abstractos oscuros
+    video:
+      "https://assets.mixkit.co/videos/preview/mixkit-abstract-background-of-ink-in-water-43187-large.mp4",
+    image:
+      "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=800",
+    link: "/servicios/branding",
+  },
+  {
+    id: 6,
+    title: "Next-Gen Web",
+    description:
+      "Interfaces ultrarrápidas con animaciones fluidas que redefinen la interacción moderna.",
+    // Video de líneas de luz dinámicas
+    video:
+      "https://assets.mixkit.co/videos/preview/mixkit-blue-and-white-lines-of-light-on-a-black-background-42754-large.mp4",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800",
+    link: "/servicios/web",
   },
 ];
 
@@ -156,9 +210,9 @@ export interface CounterProps {
 export const stats: Stat[] = [
   {
     icon: Download,
-    value: 1200000,
+    value: 8,
     suffix: "+",
-    label: "Descargas",
+    label: "Experiencia",
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
@@ -186,14 +240,6 @@ export const stats: Stat[] = [
     label: "Países",
     color: "text-green-500",
     bgColor: "bg-green-500/10",
-  },
-  {
-    icon: CreditCard,
-    value: 50,
-    suffix: "M+",
-    label: "Transacciones",
-    color: "text-purple-500",
-    bgColor: "bg-purple-500/10",
   },
   {
     icon: TrendingUp,
