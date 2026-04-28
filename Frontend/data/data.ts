@@ -3,16 +3,13 @@ import {
   Headphones,
   Zap,
   Lock,
-  Youtube,
-  Linkedin,
-  Instagram,
-  Facebook,
   Mail,
   Phone,
   MapPin,
   Download,
   Users,
   Star,
+  X,
   Globe,
   CreditCard,
   TrendingUp,
@@ -538,10 +535,10 @@ export const contactInfo: ContactInfo[] = [
 /* ********************************** */
 
 export const socialIcons: Record<string, LucideIcon> = {
-  youtube: Youtube,
-  linkedin: Linkedin,
-  instagram: Instagram,
-  facebook: Facebook,
+  youtube: X,
+  linkedin: X,
+  instagram: X,
+  facebook: X,
 };
 
 export const footerLinks: Record<string, string[]> = {
