@@ -1,3 +1,4 @@
+import { Category } from "@/types/strapi";
 import * as Icons from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 
@@ -15,80 +16,71 @@ export const getIcon = (iconName: string): Icons.LucideIcon => {
 /* SERVICIOS              */
 /* ********************************** */
 
-export interface Service {
-  id: number;
-  title: string;
-  description: string;
-  video: string;
-  image: string;
-  link: string;
-}
-
-export const SERVICES_DATA: Service[] = [
+export const SERVICES_DATA: Category[] = [
   {
     id: 1,
     title: "Experiencias Inmersivas",
     description:
       "Desarrollamos entornos digitales 360 que difuminan la línea entre lo físico y lo virtual.",
-    video: "http://localhost:1337/uploads/filmmaking_c88f189921.webm",
-    image:
+    videoUrl: "http://localhost:1337/uploads/filmmaking_c88f189921.webm",
+    imageUrl:
       "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800",
-    link: "/servicios/inmersivo",
+    slug: "/servicios/inmersivo",
   },
   {
     id: 2,
     title: "Data Intelligence",
     description:
       "Transformamos flujos de datos complejos en decisiones estratégicas mediante IA avanzada.",
-    video:
+    videoUrl:
       "https://media.magnific.com/home/relaunch/media/useCases/filmmaking.webm",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1509228468518-180dd4805a5f?q=80&w=800",
-    link: "/servicios/datos",
+    slug: "/servicios/datos",
   },
   {
     id: 3,
     title: "Cybercore Security",
     description:
       "Protección proactiva diseñada para resistir las amenazas digitales más sofisticadas del futuro.",
-    video:
+    videoUrl:
       "https://assets.mixkit.co/videos/preview/mixkit-motion-graphics-of-a-technological-tunnel-with-blue-lights-42566-large.mp4",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800",
-    link: "/servicios/seguridad",
+    slug: "/servicios/seguridad",
   },
   {
     id: 4,
     title: "Ecosistemas Cloud",
     description:
       "Arquitecturas escalables y resilientes que forman la columna vertebral de tu negocio global.",
-    video:
+    videoUrl:
       "https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-of-white-particles-on-a-black-background-42750-large.mp4",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
-    link: "/servicios/cloud",
+    slug: "/servicios/cloud",
   },
   {
     id: 5,
     title: "Neural Branding",
     description:
       "Identidades visuales creadas con algoritmos para conectar profundamente con el usuario.",
-    video:
+    videoUrl:
       "https://assets.mixkit.co/videos/preview/mixkit-abstract-background-of-ink-in-water-43187-large.mp4",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=800",
-    link: "/servicios/branding",
+    slug: "/servicios/branding",
   },
   {
     id: 6,
     title: "Next-Gen Web",
     description:
       "Interfaces ultrarrápidas con animaciones fluidas que redefinen la interacción moderna.",
-    video:
+    videoUrl:
       "https://assets.mixkit.co/videos/preview/mixkit-blue-and-white-lines-of-light-on-a-black-background-42754-large.mp4",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800",
-    link: "/servicios/web",
+    slug: "/servicios/web",
   },
 ];
 
@@ -228,7 +220,7 @@ type Project = {
   title: string;
   category: string;
   description: string;
-  image: string;
+  imageUrl: string;
   tags: string[];
 };
 
@@ -239,7 +231,7 @@ export const projects: Project[] = [
     category: "Branding",
     description:
       "Renovación completa de imagen corporativa para startup tecnológica.",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1460925892157-abf1f7a23d16?w=800&q=80",
     tags: ["Branding", "Web", "UI/UX"],
   },
@@ -248,7 +240,7 @@ export const projects: Project[] = [
     title: "Gastro Gourmet",
     category: "Marketing Digital",
     description: "Estrategia integral de posicionamiento para alta cocina.",
-    image:
+    imageUrl:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
     tags: ["SEO", "Social Media", "Ads"],
   },

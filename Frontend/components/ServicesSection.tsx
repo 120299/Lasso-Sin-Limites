@@ -3,11 +3,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { TitleSection } from "./TitleSection";
-import { Service } from "@/data/interface";
-import { SERVICES_DATA } from "@/data/data";
+
+import { Category } from "@/types/strapi";
 
 interface ServicesGridProps {
-  data: Service[];
+  data: Category[];
 }
 
 export default function ServicesGrid({ data }: ServicesGridProps) {
@@ -39,7 +39,7 @@ export default function ServicesGrid({ data }: ServicesGridProps) {
           {data.map((service, index) => (
             <motion.a
               key={service.id}
-              href={service.link}
+              href={service.slug}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -54,10 +54,10 @@ export default function ServicesGrid({ data }: ServicesGridProps) {
                   loop
                   muted
                   playsInline
-                  poster={service.image}
+                  poster={service.imageUrl}
                   className="absolute inset-0 size-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 >
-                  <source src={service.video} type="video/webm" />
+                  <source src={service.videoUrl} type="video/webm" />
                 </video>
 
                 {/* Capas de Overlay */}

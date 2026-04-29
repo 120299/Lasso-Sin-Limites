@@ -19,14 +19,6 @@
       "type": "string",
       "required": true
     },
-    "video": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
-      "allowedTypes": [
-        "videos"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -35,9 +27,13 @@
         "images"
       ]
     },
-    "link": {
-      "type": "text",
-      "required": true
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "videos"
+      ]
     },
     "slug": {
       "type": "uid",
