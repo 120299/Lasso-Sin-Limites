@@ -1,127 +1,158 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { phoneMockup1, phoneMockup2, phoneMockup3 } from "@/assets";
 
+const PROJECT_SETS = [
+  {
+    id: 1,
+    images: [phoneMockup1, phoneMockup2, phoneMockup3],
+  },
+];
+
 export const HeroSection = () => {
+  const [viewIndex, setViewIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViewIndex((prev) => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const getPos = (offset: number) => (viewIndex + offset) % 3;
+
   return (
-    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden gradiente-mixto">
-      {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
-        <div className="absolute top-20 right-20 size-72 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute bottom-40 right-40 size-96 rounded-full bg-primary/10 blur-3xl" />
-      </div>
-
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100dvh-120px)]">
+    <section className="relative min-h-[100dvh] pt-14 lg:pt-0 overflow-hidden gradiente-mixto flex items-center">
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Grid principal: Jerarquía visual corregida */}
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 items-center">
+          {/* COLUMNA IZQUIERDA: Texto responsivo */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
+            transition={{ duration: 0.8 }}
+            className="flex flex-col text-center lg:text-left items-center lg:items-start z-30"
           >
-            {/* Tag de experiencia real */}
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-              className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full"
-            >
-              8 Años de Experiencia
+            <motion.span className="inline-block px-3 py-1 mb-4 text-[10px] md:text-xs font-black tracking-[0.2em] uppercase bg-primary/10 text-primary rounded-full">
+              8 Años Impulsando Ideas
             </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-foreground text-balance"
-            >
-              Desarrollamos tu App y {""}
-              <span className="text-gradient">
-                te asesoramos en todo momento.
-              </span>
-            </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="section-description md:text-xl max-w-xl mx-auto lg:mx-0 text-justify md:text-left text-pretty hyphens-auto mt-6"
-            >
-              Expertos en aplicaciones móviles y plataformas web a medida.
-              Además, cubrimos el soporte técnico, diseño y merchandising que tu
-              empresa necesita. 8 años simplificando la tecnología para que tú
-              solo te ocupes de crecer.
-            </motion.p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] text-foreground text-balance">
+              Tu visión hecha <br className="hidden sm:block" />
+              <span className="text-gradient">software de impacto.</span>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <Button variant={"coral"} size={"lg"} className="px-8 font-bold">
-                Iniciar Proyecto
+            {/* IMAGEN MÓVIL/TABLET: Espacio compactado */}
+            <div className="lg:hidden w-full max-w-md sm:max-w-lg h-[280px] sm:h-[350px] relative flex items-center justify-center my-4 sm:my-8">
+              <div className="relative w-full h-full flex items-center justify-center scale-90 sm:scale-100">
+                <motion.div
+                  key={`m-main-${getPos(0)}`}
+                  transition={{ duration: 0.8 }}
+                  className="relative z-20 animate-float"
+                >
+                  <Image
+                    src={PROJECT_SETS[0].images[getPos(0)]}
+                    alt="App"
+                    width={180}
+                    height={180}
+                    className="w-36 sm:w-48 drop-shadow-2xl"
+                  />
+                </motion.div>
+                <div className="absolute left-2 sm:left-4 opacity-70 z-10 animate-float-delayed scale-75">
+                  <Image
+                    src={PROJECT_SETS[0].images[getPos(1)]}
+                    alt="Side"
+                    width={150}
+                    height={150}
+                    className="w-28 sm:w-36"
+                  />
+                </div>
+                <div className="absolute right-2 sm:right-4 opacity-70 z-10 animate-float-slow scale-75">
+                  <Image
+                    src={PROJECT_SETS[0].images[getPos(2)]}
+                    alt="Side"
+                    width={150}
+                    height={150}
+                    className="w-28 sm:w-36"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Descripción optimizada con text-pretty */}
+            <p className="mt-2 lg:mt-8 text-base md:text-lg lg:text-xl text-muted-foreground max-w-lg lg:max-w-xl text-pretty leading-relaxed mx-auto lg:mx-0">
+              No solo escribimos código; diseñamos soluciones rentables. Nos
+              encargamos de la tecnología para que tú lideres tu negocio.
+            </p>
+
+            <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Button
+                variant={"coral"}
+                className="px-10 h-14 rounded-2xl font-bold text-lg shadow-xl shadow-coral/20"
+              >
+                Cotizar Proyecto
               </Button>
               <Button
                 variant={"outline"}
-                size={"lg"}
-                className="px-8 border-foreground/20 hover:bg-foreground hover:text-background font-bold"
+                className="px-10 h-14 rounded-2xl border-foreground/10 font-bold text-lg"
               >
-                Servicios 360
+                Ver Portafolio
               </Button>
-            </motion.div>
+            </div>
           </motion.div>
 
-          <div className="relative h-125 md:h-150 lg:h-175">
-            {/* Imagen Central: El Producto (App/Web) */}
-            <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 animate-float"
-            >
-              <Image
-                src={phoneMockup1.src}
-                alt="Desarrollo de Software a medida"
-                width={192}
-                height={192}
-                className="w-48 md:w-56 lg:w-64 drop-shadow-2xl"
-              />
-            </motion.div>
-
-            {/* Imagen Izquierda: Soporte y Gestión */}
-            <motion.div
-              initial={{ opacity: 0, x: -50, y: 30 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-10 animate-float-delayed"
-            >
-              <Image
-                src={phoneMockup2.src}
-                alt="Soporte Técnico y Sistemas"
-                width={192}
-                height={192}
-                className="w-40 md:w-48 lg:w-52 opacity-90 drop-shadow-xl"
-              />
-            </motion.div>
-
-            {/* Imagen Derecha: Diseño y Branding */}
-            <motion.div
-              initial={{ opacity: 0, x: 50, y: -30 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-10 animate-float-slow"
-            >
-              <Image
-                src={phoneMockup3.src}
-                alt="Diseño y Merchandising"
-                width={192}
-                height={192}
-                className="w-40 md:w-48 lg:w-52 opacity-90 drop-shadow-xl"
-              />
-            </motion.div>
+          {/* COLUMNA DERECHA: Desktop */}
+          <div className="hidden lg:flex relative h-[600px] w-full max-w-2xl mx-auto items-center justify-center overflow-visible">
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={`d-main-${getPos(0)}`}
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative z-20 animate-float"
+              >
+                <Image
+                  src={PROJECT_SETS[0].images[getPos(0)]}
+                  alt="Main"
+                  width={280}
+                  height={280}
+                  className="w-64 lg:w-72 drop-shadow-[0_35px_35px_rgba(0,0,0,0.3)] object-contain"
+                />
+              </motion.div>
+              <motion.div
+                key={`d-left-${getPos(1)}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }}
+                className="absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-10 animate-float-delayed"
+              >
+                <Image
+                  src={PROJECT_SETS[0].images[getPos(1)]}
+                  alt="Left"
+                  width={220}
+                  height={220}
+                  className="w-48 xl:w-56 opacity-90"
+                />
+              </motion.div>
+              <motion.div
+                key={`d-right-${getPos(2)}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }}
+                className="absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 z-10 animate-float-slow"
+              >
+                <Image
+                  src={PROJECT_SETS[0].images[getPos(2)]}
+                  alt="Right"
+                  width={220}
+                  height={220}
+                  className="w-48 xl:w-56 opacity-90"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

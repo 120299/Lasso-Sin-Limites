@@ -59,7 +59,7 @@ export const StatsSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <TitleSection title="Impacto Real en Números" />
+          <TitleSection title="Disponibilidad y Soporte Real" />
           {/* Optimización de texto: justify con balanceo para evitar huecos en móviles */}
           <p className="mt-4 text-justify md:text-center text-balance hyphens-auto tracking-tight md:tracking-normal text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
             Nuestra plataforma procesa miles de transacciones diarias,

@@ -19,6 +19,7 @@
     "@strapi/plugin-users-permissions": "5.43.0",
     "@strapi/strapi": "5.43.0",
     "mysql2": "3.20.0",
+    "qs": "^6.15.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/qs": "6.15.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "typescript": "^5"
@@ -35,7 +37,7 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "ad6753df-431d-46ac-8724-de20b2ddccbc",
-    "installId": "63a5a63fb320c3f6b7f111d1f59b0ad1619d48f099569cca11db1d06ca8744c4"
+    "uuid": "db9c3c2f-9a24-400c-b4a7-0d748405cc31",
+    "installId": "ce3c798dbd6d7caa86e1efcb7ed9d017d76a8c4a5862ac7cd2085aa74cf8ccd8"
   }
 }

@@ -8,27 +8,29 @@ import Portfolio from "@/components/Portfolio";
 import { StatsSection } from "@/components/StatsSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import ServicesModule from "@/components/ServicesSection";
-import { partners } from "@/data/data";
-
-export default function Home() {
+import { getStacks, getCategories } from "@/data/strapiData";
+export default async function Home() {
+  const listStacks = await getStacks();
+  const listCategoris = await getCategories();
+  console.log(listCategoris);
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
         <HeroSection />
         <PartnertsSection
-          title="Nuestras Alianzas Estratégicas"
-          data={partners}
+          title="Empresas que han trabajado con nosotros"
+          data={listStacks}
           backgorund="bg-gray-100"
         />
-        <ServicesModule />
+        <ServicesModule data={listCategoris} />
         <PartnertsSection
           title="Nuestro Stack Tecnológico"
-          data={partners}
+          data={listStacks}
           backgorund="bg-gray-100"
         />
-        <StatsSection />
         <FeaturesSection />
+        <StatsSection />
         <Portfolio />
         <TestimonialsSection />
         <ContactSection />
@@ -36,4 +38,7 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+function useState(arg0: never[]): [any, any] {
+  throw new Error("Function not implemented.");
 }

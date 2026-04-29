@@ -1,52 +1,36 @@
-import {
-  Shield,
-  Headphones,
-  Zap,
-  Lock,
-  Mail,
-  Phone,
-  MapPin,
-  Download,
-  Users,
-  Star,
-  X,
-  Globe,
-  CreditCard,
-  TrendingUp,
-  type LucideIcon,
-  ArrowRight,
-  Sparkles,
-  Code,
-  Cpu,
-  Rocket,
-  Target,
-  Award,
-  CalendarCheck,
-  LayoutDashboard,
-  Repeat,
-  ShieldCheck,
-  Code2,
-  Layers,
-} from "lucide-react";
+import * as Icons from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 
-// Interfaz para TypeScript
-export interface ServiceItem {
+/**
+ * FUNCIÓN AUXILIAR: getIcon
+ * Convierte un string (de Strapi) en un componente de Lucide.
+ * Si el icono no existe, devuelve el icono 'HelpCircle' por defecto.
+ */
+export const getIcon = (iconName: string): Icons.LucideIcon => {
+  const Icon = (Icons as any)[iconName];
+  return Icon || Icons.HelpCircle;
+};
+
+/* ********************************** */
+/* SERVICIOS              */
+/* ********************************** */
+
+export interface Service {
   id: number;
   title: string;
   description: string;
-  video: string; // URL del video .webm o .mp4
-  image: string; // Imagen de respaldo (poster)
+  video: string;
+  image: string;
   link: string;
 }
-export const SERVICES_DATA: ServiceItem[] = [
+
+export const SERVICES_DATA: Service[] = [
   {
     id: 1,
     title: "Experiencias Inmersivas",
     description:
-      "Desarrollamos entornos digitales que difuminan la línea entre lo físico y lo virtual.",
-    // Video de partículas oscuras en movimiento
-    video:
-      "https://media.magnific.com/home/relaunch/media/useCases/filmmaking.webm",
+      "Desarrollamos entornos digitales 360 que difuminan la línea entre lo físico y lo virtual.",
+    video: "http://localhost:1337/uploads/filmmaking_c88f189921.webm",
     image:
       "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800",
     link: "/servicios/inmersivo",
@@ -56,7 +40,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: "Data Intelligence",
     description:
       "Transformamos flujos de datos complejos en decisiones estratégicas mediante IA avanzada.",
-    // Video de conexiones de red/nodos
     video:
       "https://media.magnific.com/home/relaunch/media/useCases/filmmaking.webm",
     image:
@@ -68,7 +51,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: "Cybercore Security",
     description:
       "Protección proactiva diseñada para resistir las amenazas digitales más sofisticadas del futuro.",
-    // Video de túnel tecnológico oscuro
     video:
       "https://assets.mixkit.co/videos/preview/mixkit-motion-graphics-of-a-technological-tunnel-with-blue-lights-42566-large.mp4",
     image:
@@ -80,7 +62,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: "Ecosistemas Cloud",
     description:
       "Arquitecturas escalables y resilientes que forman la columna vertebral de tu negocio global.",
-    // Video de nubes abstractas de datos
     video:
       "https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-of-white-particles-on-a-black-background-42750-large.mp4",
     image:
@@ -92,7 +73,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: "Neural Branding",
     description:
       "Identidades visuales creadas con algoritmos para conectar profundamente con el usuario.",
-    // Video de fluidos abstractos oscuros
     video:
       "https://assets.mixkit.co/videos/preview/mixkit-abstract-background-of-ink-in-water-43187-large.mp4",
     image:
@@ -104,7 +84,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     title: "Next-Gen Web",
     description:
       "Interfaces ultrarrápidas con animaciones fluidas que redefinen la interacción moderna.",
-    // Video de líneas de luz dinámicas
     video:
       "https://assets.mixkit.co/videos/preview/mixkit-blue-and-white-lines-of-light-on-a-black-background-42754-large.mp4",
     image:
@@ -114,7 +93,7 @@ export const SERVICES_DATA: ServiceItem[] = [
 ];
 
 /* ********************************** */
-/*               HEADER               */
+/* HEADER              */
 /* ********************************** */
 
 type NavItem = {
@@ -124,70 +103,18 @@ type NavItem = {
 };
 
 export const navItems: NavItem[] = [
-  {
-    key: "nav.home",
-    href: "#",
-    label: "Inicio",
-  },
-  {
-    key: "nav.services",
-    href: "/blog",
-    label: "Blog",
-  },
-
-  {
-    key: "nav.features",
-    href: "#features",
-    label: "Características",
-  },
-  { key: "nav.stats", href: "#stats", label: "Estadísticas" },
-  {
-    key: "nav.testimonials",
-    href: "#testimonials",
-    label: "Testimonios",
-  },
+  { key: "nav.home", href: "#", label: "Inicio" },
+  { key: "nav.services", href: "/blog", label: "Blog" },
+  { key: "nav.features", href: "#features", label: "Por qué nosotros" },
+  { key: "nav.stats", href: "#stats", label: "Impacto" },
+  { key: "nav.testimonials", href: "#testimonials", label: "Testimonios" },
   { key: "nav.contact", href: "#contact", label: "Contacto" },
 ];
 
 /* ********************************** */
-/*              PARTNERS              */
+/* STATS              */
 /* ********************************** */
 
-export interface Partner {
-  name: string;
-  logoUrl: string; // URL completa de internet
-}
-
-export const partners: Partner[] = [
-  {
-    name: "Logitech",
-    logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/1/17/Logitech_logo.svg",
-  },
-  {
-    name: "Spotify",
-    logoUrl: "https://cdn.worldvectorlogo.com/logos/spotify-logo.svg",
-  },
-  {
-    name: "Airbnb",
-    logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
-  },
-  {
-    name: "Slack",
-    logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg",
-  },
-  {
-    name: "Discord",
-    logoUrl:
-      "https://1000logos.net/wp-content/uploads/2021/06/Discord-logo.svg",
-  },
-];
-/* ********************************** */
-/*                STATS               */
-/* ********************************** */
-// 1. Interfaz mejorada
 export interface Stat {
   label: string;
   value: number;
@@ -207,90 +134,95 @@ export interface CounterProps {
   prefix?: string;
   decimals?: number;
 }
-export const stats: Stat[] = [
+
+// Simulamos que estos nombres vienen de Strapi como strings
+const rawStats = [
   {
-    icon: Download,
-    value: 8,
-    suffix: "+",
-    label: "Experiencia",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-  },
-  {
-    icon: Users,
-    value: 40000,
-    suffix: "+",
-    label: "Usuarios Activos",
+    icon: "History",
+    value: 60,
+    prefix: "+ ",
+    label: "Proyectos Internacionales",
     color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
+    bg: "bg-blue-500/10",
   },
   {
-    icon: Star,
-    value: 4.8,
+    icon: "Globe",
+    value: 5,
     suffix: "",
-    label: "Calificación",
-    color: "text-yellow-500",
-    bgColor: "bg-yellow-500/10",
-    isDecimal: true,
-  },
-  {
-    icon: Globe,
-    value: 200,
-    suffix: "+",
-    label: "Países",
+    label: "Países con nuestra huella",
     color: "text-green-500",
-    bgColor: "bg-green-500/10",
+    bg: "bg-green-500/10",
   },
   {
-    icon: TrendingUp,
-    value: 99.9,
-    suffix: "%",
-    label: "Disponibilidad",
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-    isDecimal: true,
+    icon: "Palette",
+    value: 20,
+    suffix: "+",
+    label: "Diseños de Experiencia",
+    color: "text-purple-500",
+    bg: "bg-purple-500/10",
+  },
+  {
+    icon: "ShieldCheck",
+    value: 24,
+    suffix: "/7",
+    label: "Soporte y Disponibilidad",
+    color: "text-orange-500",
+    bg: "bg-orange-500/10",
   },
 ];
 
+export const stats: Stat[] = rawStats.map((s) => ({
+  ...s,
+  icon: getIcon(s.icon), // Mapeo dinámico aquí
+  bgColor: s.bg,
+}));
+
 /* ********************************** */
-/*              FEATURES              */
+/* FEATURES             */
 /* ********************************** */
+
 type Feature = {
   icon: LucideIcon;
   title: string;
   description: string;
 };
 
-export const features: Feature[] = [
+const rawFeatures = [
   {
-    icon: ShieldCheck,
-    title: "8 Años de Éxito",
+    icon: "Award",
+    title: "Calidad Internacional",
     description:
-      "Casi una década impulsando marcas. Experiencia probada que elimina errores y maximiza tu inversión.",
+      "Experiencia probada en múltiples países, adaptándonos a estándares globales de diseño y desarrollo.",
   },
   {
-    icon: Zap,
-    title: "Agilidad Real (Agile)",
+    icon: "Zap",
+    title: "Agilidad 360º",
     description:
-      "Entregas rápidas y sin burocracia. Nos adaptamos a tu ritmo para que nunca dejes de crecer.",
+      "Desde el concepto hasta el soporte post-lanzamiento. Un solo equipo responsable de todo el ciclo.",
   },
   {
-    icon: ShieldCheck,
-    title: "Responsabilidad 360º",
+    icon: "Users",
+    title: "Más que código: Aliados",
     description:
-      "Nos adueñamos de tus objetivos. Resultados garantizados con un equipo que responde siempre.",
+      "Nos involucramos en tu visión. Tu éxito es nuestra métrica de desempeño más importante.",
   },
   {
-    icon: ShieldCheck,
-    title: "Lasso Sin Límites",
+    icon: "Sparkles",
+    title: "Diseño con Propósito",
     description:
-      "Creatividad y estrategia unidas. Conectamos tu marca con el mercado de forma imparable.",
+      "No solo creamos interfaces bonitas; diseñamos experiencias que convierten y fidelizan usuarios.",
   },
 ];
 
+export const features: Feature[] = rawFeatures.map((f) => ({
+  ...f,
+  icon: getIcon(f.icon), // Mapeo dinámico aquí
+}));
+
 /* ********************************** */
-/*               PROJECTS              */
+/* PROJECTS             */
 /* ********************************** */
+
 type Project = {
   id: string;
   title: string;
@@ -309,219 +241,22 @@ export const projects: Project[] = [
       "Renovación completa de imagen corporativa para startup tecnológica.",
     image:
       "https://images.unsplash.com/photo-1460925892157-abf1f7a23d16?w=800&q=80",
-    tags: ["Branding", "Web", "Social Media"],
+    tags: ["Branding", "Web", "UI/UX"],
   },
   {
     id: "p2",
     title: "Gastro Gourmet",
     category: "Marketing Digital",
-    description: "Campaña digital para restaurante de alta cocina.",
+    description: "Estrategia integral de posicionamiento para alta cocina.",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-    tags: ["SEO", "Social Media", "Publicidad"],
+    tags: ["SEO", "Social Media", "Ads"],
   },
-  {
-    id: "p3",
-    title: "FitLife App",
-    category: "Desarrollo Web",
-    description: "Aplicación web para gestión de entrenamientos y nutrición.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    tags: ["Web App", "UI/UX", "Desarrollo"],
-  },
-  {
-    id: "p4",
-    title: "Moda Urbana",
-    category: "Producción Audiovisual",
-    description: "Sesión fotográfica y vídeo para colección de moda.",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    tags: ["Foto", "Vídeo", "Reels"],
-  },
-  {
-    id: "p5",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p6",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p7",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p8",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p9",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p56",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p533",
-    title: "EcoTravel",
-    category: "E-commerce",
-    description: "Tienda online para agencia de turismo ecológico.",
-    image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-    tags: ["E-commerce", "Web", "Marketing"],
-  },
-  {
-    id: "p6",
-    title: "SmartHome",
-    category: "Branding",
-    description: "Identidad visual para empresa de domótica.",
-    image:
-      "https://images.unsplash.com/photo-1558618047-f4e80f3e7f2b?w=800&q=80",
-    tags: ["Logo", "Branding", "Packaging"],
-  },
-  {
-    id: "p7",
-    title: "HealthPlus",
-    category: "Desarrollo Web",
-    description: "Plataforma de telemedicina con citas online.",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
-    tags: ["Web App", "Healthcare", "React"],
-  },
-  {
-    id: "p8",
-    title: "FoodBox",
-    category: "E-commerce",
-    description: "App de delivery de comida saludable.",
-    image:
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-    tags: ["Mobile App", "E-commerce", "Flutter"],
-  },
-  {
-    id: "p9",
-    title: "CryptoWallet",
-    category: "Desarrollo Web",
-    description: "Billetera digital con criptomonedas.",
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
-    tags: ["Fintech", "Web3", "Blockchain"],
-  },
-  {
-    id: "p10",
-    title: "Urban Fitness",
-    category: "Marketing Digital",
-    description: "Campaña de lanzamiento para cadena de gimnasios.",
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-    tags: ["Google Ads", "Facebook Ads", "SEO"],
-  },
-  {
-    id: "p11",
-    title: "Zen Spa",
-    category: "Branding",
-    description: "Identidad completa para centro de bienestar.",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80",
-    tags: ["Branding", "Packaging", "Web"],
-  },
-  {
-    id: "p12",
-    title: "TechConf 2024",
-    category: "Producción Audiovisual",
-    description: "Cobertura audiovisual para conferencia tecnológica.",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-    tags: ["Vídeo", "Streaming", "Fotografía"],
-  },
-  {
-    id: "p13",
-    title: "AutoZone",
-    category: "E-commerce",
-    description: "Tienda online de autopartes con catálogo dinámico.",
-    image:
-      "https://images.unsplash.com/photo-1487754180477-5af8c4b0d325?w=800&q=80",
-    tags: ["E-commerce", " Shopify", "API"],
-  },
-  {
-    id: "p14",
-    title: "PureSkin",
-    category: "Marketing Digital",
-    description: "Estrategia digital para marca de skincare.",
-    image:
-      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80",
-    tags: ["Influencers", "Contenido", "Ads"],
-  },
-  {
-    id: "p15",
-    title: "BookWorm",
-    category: "Desarrollo Web",
-    description: "Plataforma de recomendados de libros con IA.",
-    image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
-    tags: ["Web App", "AI", "Next.js"],
-  },
-  {
-    id: "p16",
-    title: "ArtGallery",
-    category: "Producción Audiovisual",
-    description: "Exposición virtual en 3D para galería de arte.",
-    image:
-      "https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800&q=80",
-    tags: ["3D", "WebGL", "Exposición"],
-  },
-  {
-    id: "p17",
-    title: "GreenEnergy",
-    category: "Branding",
-    description: "Branding para empresa de energía renovable.",
-    image:
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
-    tags: ["Sostenibilidad", "Logo", "Web"],
-  },
-  {
-    id: "p18",
-    title: "PetLove",
-    category: "E-commerce",
-    description: "Tienda online para productos de mascotas.",
-    image:
-      "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
-    tags: ["E-commerce", "Mascotas", "Marketing"],
-  },
+  // ... añadir los demás aquí siguiendo el mismo formato
 ];
 
 /* ********************************** */
-/*            TESTIMONIALS            */
+/* TESTIMONIALS           */
 /* ********************************** */
 
 type Testimonial = {
@@ -536,33 +271,20 @@ export const testimonials: Testimonial[] = [
     name: "María García",
     date: "24 Jul 2024",
     content:
-      "Finova ha sido un cambio radical para mis metas de ahorro. El diseño intuitivo de la app me ayuda a controlar mi presupuesto y ver exactamente a dónde va mi dinero.",
+      "Lasso Sin Límites transformó nuestra visión en una realidad digital. El soporte 360 nos dio la tranquilidad que necesitábamos para escalar.",
     avatar: "MG",
   },
   {
     name: "Carlos Rodríguez",
     date: "18 Ago 2024",
     content:
-      "Confío en Finova con mis finanzas por sus características de seguridad. Además, la app es tan fácil de usar que gestionar mi dinero nunca ha sido tan sencillo.",
+      "Su capacidad para gestionar proyectos en diferentes países con tanta fluidez es impresionante. Un socio tecnológico de confianza.",
     avatar: "CR",
-  },
-  {
-    name: "Ana Martínez",
-    date: "5 Sep 2024",
-    content:
-      "Los análisis en tiempo real han cambiado completamente cómo gestiono mis inversiones. Puedo seguir todo en un solo lugar y tomar decisiones informadas rápidamente.",
-    avatar: "AM",
-  },
-  {
-    name: "Brayan Lasso",
-    date: "5 Sep 2024",
-    content: "asdasdasdadasd",
-    avatar: "BL",
   },
 ];
 
 /* ********************************** */
-/*               CONTACT              */
+/* CONTACT             */
 /* ********************************** */
 
 type ContactInfo = {
@@ -570,25 +292,30 @@ type ContactInfo = {
   value: string;
 };
 
-export const contactInfo: ContactInfo[] = [
-  { icon: Mail, value: "hello@finova.com" },
-  { icon: Phone, value: "+1 (555) 123-4567" },
-  { icon: MapPin, value: "San Francisco, CA" },
+const rawContact = [
+  { icon: "Mail", value: "hello@lassosinlimites.com" },
+  { icon: "Phone", value: "+1 (555) 123-4567" },
+  { icon: "MapPin", value: "Soporte Global" },
 ];
 
+export const contactInfo: ContactInfo[] = rawContact.map((c) => ({
+  ...c,
+  icon: getIcon(c.icon),
+}));
+
 /* ********************************** */
-/*               FOOTER               */
+/* FOOTER              */
 /* ********************************** */
 
 export const socialIcons: Record<string, LucideIcon> = {
-  youtube: X,
-  linkedin: X,
-  instagram: X,
-  facebook: X,
+  youtube: getIcon("Youtube"),
+  linkedin: getIcon("Linkedin"),
+  instagram: getIcon("Instagram"),
+  facebook: getIcon("Facebook"),
 };
 
 export const footerLinks: Record<string, string[]> = {
-  product: ["Características", "Precios", "Seguridad", "Actualizaciones"],
-  company: ["Nosotros", "Empleos", "Blog", "Prensa"],
-  legal: ["Privacidad", "Términos", "Cookies", "Licencias"],
+  product: ["Experiencias", "Data Intelligence", "Seguridad", "Cloud"],
+  company: ["Nosotros", "Portafolio", "Blog", "Contacto"],
+  legal: ["Privacidad", "Términos", "Cookies"],
 };

@@ -20,11 +20,10 @@ export const ContactSection = () => {
             viewport={{ once: true }}
             className="section-header-wrapper"
           >
-            <TitleSection title="Contáctanos" className="text-left" />
-            {/* Texto optimizado: Justificado suave en móvil, natural en desktop */}
-            <p className="section-description mt-4 text-justify lg:text-left text-pretty hyphens-auto max-w-md">
-              ¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje
-              y te responderemos lo antes posible.
+            <TitleSection title="Impulsa tu Idea" />
+            <p className="mt-6 text-base md:text-lg text-muted-foreground text-pretty max-w-md">
+              Estamos listos para analizar tu proyecto y ofrecerte la mejor ruta
+              tecnológica. Hablemos de cómo escalar tu negocio hoy mismo.
             </p>
 
             <div className="mt-10 space-y-6">

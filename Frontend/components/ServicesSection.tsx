@@ -3,9 +3,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { TitleSection } from "./TitleSection";
+import { Service } from "@/data/interface";
 import { SERVICES_DATA } from "@/data/data";
 
-export default function ServicesGrid() {
+interface ServicesGridProps {
+  data: Service[];
+}
+
+export default function ServicesGrid({ data }: ServicesGridProps) {
   return (
     <section className="py-24 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500 relative overflow-hidden">
       {/* Decoración de fondo sutil para mantener coherencia */}
@@ -23,17 +28,15 @@ export default function ServicesGrid() {
             title="Soluciones Digitales a Medida"
             className="text-gradient"
           />
-          {/* Optimización de texto responsive: justify suave en móvil, centrado en desktop */}
-          <p className="mt-4 text-justify md:text-center text-pretty hyphens-auto tracking-tight md:tracking-normal text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-2xl mx-auto">
-            Transformamos ideas complejas en experiencias digitales
-            excepcionales. Nuestro enfoque combina estrategia, diseño
-            vanguardista y tecnología de punta.
+          <p className="mt-4 text-base md:text-lg text-muted-foreground text-pretty">
+            Transformamos procesos complejos en herramientas fluidas, escalables
+            y orientadas al retorno de inversión.
           </p>
         </motion.div>
 
         {/* Grid de servicios */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES_DATA.map((service, index) => (
+          {data.map((service, index) => (
             <motion.a
               key={service.id}
               href={service.link}

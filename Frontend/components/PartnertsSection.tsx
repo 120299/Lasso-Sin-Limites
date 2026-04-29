@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-import { partners } from "@/data/data";
+import { Partner } from "@/data/interface";
 
 interface PartnertsSectionProps {
   title: string;
-  data: typeof partners;
+  data: Partner[];
   backgorund: string;
 }
 export const PartnertsSection = ({
@@ -15,8 +14,6 @@ export const PartnertsSection = ({
   data,
   backgorund,
 }: PartnertsSectionProps) => {
-  const duplicatedPartners = [...data, ...data];
-
   return (
     <section
       className={`py-14 md:py-20 ${backgorund} bg-zinc-50dark:bg-zinc-950 overflow-hidden`}
@@ -48,7 +45,7 @@ export const PartnertsSection = ({
               repeat: Infinity,
             }}
           >
-            {duplicatedPartners.map((partner, index) => (
+            {data.map((partner, index) => (
               <motion.div
                 key={`${partner.name}-${index}`}
                 whileHover={{ scale: 1.05 }} // Pequeño efecto de zoom al pasar el mouse

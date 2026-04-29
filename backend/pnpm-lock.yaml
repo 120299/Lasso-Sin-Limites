@@ -20,6 +20,9 @@ importers:
       mysql2:
         specifier: 3.20.0
         version: 3.20.0(@types/node@20.19.39)
+      qs:
+        specifier: ^6.15.1
+        version: 6.15.1
       react:
         specifier: ^18.0.0
         version: 18.3.1
@@ -36,6 +39,9 @@ importers:
       '@types/node':
         specifier: ^20
         version: 20.19.39
+      '@types/qs':
+        specifier: 6.15.0
+        version: 6.15.0
       '@types/react':
         specifier: ^18
         version: 18.3.28
@@ -965,6 +971,9 @@ packages:
 
   '@paralleldrive/cuid2@2.2.2':
     resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
+
+  '@paralleldrive/cuid2@2.3.1':
+    resolution: {integrity: sha512-XO7cAxhnTZl0Yggq6jOgjiOHhbgcO4NqFqwSmQpjK3b6TEE6Uj/jfSk6wzYyemh3+I0sHirKSetjQwn5cZktFw==}
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.15':
     resolution: {integrity: sha512-LFWllMA55pzB9D34w/wXUCf8+c+IYKuJDgxiZ3qMhl64KRMBHYM1I3VdGaD2BV5FNPV2/S2596bppxHbv2ZydQ==}
@@ -7150,8 +7159,8 @@ snapshots:
 
   '@koa/router@12.0.2':
     dependencies:
-      debug: 4.3.4
-      http-errors: 2.0.0
+      debug: 4.4.3(supports-color@5.5.0)
+      http-errors: 2.0.1
       koa-compose: 4.1.0
       methods: 1.1.2
       path-to-regexp: 6.3.0
@@ -7223,6 +7232,10 @@ snapshots:
   '@opentelemetry/api@1.9.0': {}
 
   '@paralleldrive/cuid2@2.2.2':
+    dependencies:
+      '@noble/hashes': 1.8.0
+
+  '@paralleldrive/cuid2@2.3.1':
     dependencies:
       '@noble/hashes': 1.8.0
 
@@ -9982,7 +9995,7 @@ snapshots:
     dependencies:
       '@hapi/bourne': 3.0.0
       inflation: 2.1.0
-      qs: 6.15.0
+      qs: 6.15.1
       raw-body: 2.5.3
       type-is: 1.6.18
 
@@ -10653,10 +10666,10 @@ snapshots:
 
   formidable@2.1.5:
     dependencies:
-      '@paralleldrive/cuid2': 2.2.2
+      '@paralleldrive/cuid2': 2.3.1
       dezalgo: 1.0.4
       once: 1.4.0
-      qs: 6.15.0
+      qs: 6.15.1
 
   formik@2.4.5(@types/react@18.3.28)(react@18.3.1):
     dependencies:
