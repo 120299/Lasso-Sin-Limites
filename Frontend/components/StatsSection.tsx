@@ -52,7 +52,7 @@ export const StatsSection = () => {
       {/* Decoración de fondo (Opcional) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(112, 10, 10, 0.05)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,8 @@ export const StatsSection = () => {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <TitleSection title="Impacto Real en Números" />
-          <p className="mt-4 text-slate-400 text-lg">
+          {/* Optimización de texto: justify con balanceo para evitar huecos en móviles */}
+          <p className="mt-4 text-justify md:text-center text-balance hyphens-auto tracking-tight md:tracking-normal text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
             Nuestra plataforma procesa miles de transacciones diarias,
             garantizando seguridad y escalabilidad para cada usuario.
           </p>
@@ -98,8 +99,8 @@ export const StatsSection = () => {
                   />
                 </h3>
 
-                {/* Título/Label */}
-                <p className="text-slate-400 font-medium uppercase tracking-wider text-xs">
+                {/* Título/Label - text-balance para evitar saltos de línea feos en pantallas pequeñas */}
+                <p className="text-slate-400 font-medium uppercase tracking-wider text-xs text-balance">
                   {stat.label}
                 </p>
               </div>

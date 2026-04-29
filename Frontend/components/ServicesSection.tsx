@@ -1,20 +1,50 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
+import { TitleSection } from "./TitleSection";
 import { SERVICES_DATA } from "@/data/data";
 
 export default function ServicesGrid() {
   return (
-    <section className="py-20 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500">
-      <div className="container mx-auto px-6">
-        {/* Grid de 3 columnas con formato horizontal */}
+    <section className="py-24 bg-zinc-50 dark:bg-zinc-950 transition-colors duration-500 relative overflow-hidden">
+      {/* Decoración de fondo sutil para mantener coherencia */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.03)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_70%)] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Encabezado con TitleSection y animación similar a Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <TitleSection
+            title="Soluciones Digitales a Medida"
+            className="text-gradient"
+          />
+          {/* Optimización de texto responsive: justify suave en móvil, centrado en desktop */}
+          <p className="mt-4 text-justify md:text-center text-pretty hyphens-auto tracking-tight md:tracking-normal text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed max-w-2xl mx-auto">
+            Transformamos ideas complejas en experiencias digitales
+            excepcionales. Nuestro enfoque combina estrategia, diseño
+            vanguardista y tecnología de punta.
+          </p>
+        </motion.div>
+
+        {/* Grid de servicios */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES_DATA.map((service) => (
-            <a
+          {SERVICES_DATA.map((service, index) => (
+            <motion.a
               key={service.id}
               href={service.link}
-              className="group relative flex aspect-video (16/9) w-full flex-col justify-end overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group relative flex aspect-video w-full flex-col justify-end overflow-hidden rounded-3xl bg-zinc-900 shadow-xl transition-all duration-500 hover:-translate-y-2 border border-white/5"
               style={{ aspectRatio: "16 / 9" }}
             >
-              {/* Contenedor de Video */}
+              {/* Contenedor de Video/Imagen */}
               <div className="absolute inset-0 z-0">
                 <video
                   autoPlay
@@ -27,30 +57,24 @@ export default function ServicesGrid() {
                   <source src={service.video} type="video/webm" />
                 </video>
 
-                {/* Capa de fondo oscurecido (Overlay) */}
-                {/* 'bg-black/40' da ese toque oscuro constante, 'group-hover:bg-black/20' lo aclara un poco al pasar el ratón */}
-                <div className="absolute inset-0 bg-black/50 transition-colors duration-500 group-hover:bg-black/30" />
-
-                {/* Degradado extra en la base para el texto */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                {/* Capas de Overlay */}
+                <div className="absolute inset-0 bg-zinc-950/60 transition-colors duration-500 group-hover:bg-zinc-950/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-90" />
               </div>
 
               {/* Contenido de la Tarjeta */}
-              <div className="relative z-10 p-6">
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2 tracking-tight group-hover:text-primary transition-colors">
+              <div className="relative z-10 p-6 md:p-8">
+                {/* text-balance ayuda a que el título del servicio no deje palabras sueltas en tarjetas pequeñas */}
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight text-balance">
                   {service.title}
                 </h3>
-                <p className="text-zinc-300 text-xs md:text-sm line-clamp-2 font-light leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity">
-                  {service.description}
-                </p>
-
-                {/* Línea decorativa que crece al hacer hover */}
-                <div className="mt-4 h-[2px] w-0 bg-primary transition-all duration-500 group-hover:w-full" />
+                {/* Línea decorativa similar a StatsSection */}
+                <div className="mt-5 h-[2px] w-0 bg-primary transition-all duration-500 group-hover:w-full" />
               </div>
 
-              {/* Brillo sutil en el borde al hacer hover */}
-              <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 rounded-2xl transition-colors duration-500" />
-            </a>
+              {/* Efecto de brillo en borde */}
+              <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 rounded-3xl transition-colors duration-500" />
+            </motion.a>
           ))}
         </div>
       </div>

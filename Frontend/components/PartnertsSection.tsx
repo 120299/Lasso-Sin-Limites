@@ -2,16 +2,28 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+
 import { partners } from "@/data/data";
 
-export const PartnertsSection = () => {
-  const duplicatedPartners = [...partners, ...partners];
+interface PartnertsSectionProps {
+  title: string;
+  data: typeof partners;
+  backgorund: string;
+}
+export const PartnertsSection = ({
+  title,
+  data,
+  backgorund,
+}: PartnertsSectionProps) => {
+  const duplicatedPartners = [...data, ...data];
 
   return (
-    <section className="py-20 bg-gray-100 dark:bg-zinc-950 overflow-hidden">
+    <section
+      className={`py-14 md:py-20 ${backgorund} bg-zinc-50dark:bg-zinc-950 overflow-hidden`}
+    >
       <div className="container mx-auto px-4 mb-12">
-        <p className="text-center text-xs font-bold tracking-[0.2em] text-zinc-500 uppercase">
-          Nuestras Alianzas Estratégicas
+        <p className="text-center text-md md:text-xl font-bold  text-zinc-500 uppercase">
+          {title}
         </p>
       </div>
 

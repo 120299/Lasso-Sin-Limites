@@ -35,7 +35,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-foreground text-balance"
             >
               Desarrollamos tu App y {""}
               <span className="text-gradient">
@@ -47,7 +47,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="section-description md:text-xl max-w-xl mx-auto lg:mx-0 text-justify"
+              className="section-description md:text-xl max-w-xl mx-auto lg:mx-0 text-justify md:text-left text-pretty hyphens-auto mt-6"
             >
               Expertos en aplicaciones móviles y plataformas web a medida.
               Además, cubrimos el soporte técnico, diseño y merchandising que tu

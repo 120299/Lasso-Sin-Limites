@@ -8,6 +8,7 @@ import Portfolio from "@/components/Portfolio";
 import { StatsSection } from "@/components/StatsSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import ServicesModule from "@/components/ServicesSection";
+import { partners } from "@/data/data";
 
 export default function Home() {
   return (
@@ -15,8 +16,17 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <PartnertsSection />
+        <PartnertsSection
+          title="Nuestras Alianzas Estratégicas"
+          data={partners}
+          backgorund="bg-gray-100"
+        />
         <ServicesModule />
+        <PartnertsSection
+          title="Nuestro Stack Tecnológico"
+          data={partners}
+          backgorund="bg-gray-100"
+        />
         <StatsSection />
         <FeaturesSection />
         <Portfolio />

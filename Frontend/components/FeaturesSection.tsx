@@ -15,7 +15,8 @@ export const FeaturesSection = () => {
           className="section-header-wrapper"
         >
           <TitleSection title="¿Por Qué Elegirnos?" />
-          <p className="section-description">
+          {/* Ajuste de justificado suave y balanceo de líneas para el header */}
+          <p className="section-description text-justify md:text-center text-pretty hyphens-auto tracking-tight md:tracking-normal">
             Sabemos que tu marca es el resultado de mucho esfuerzo. No traemos
             fórmulas mágicas, sino la experiencia y el compromiso técnico para
             impulsar tu visión hasta donde merece llegar
@@ -36,10 +37,14 @@ export const FeaturesSection = () => {
               <div className="size-14 rounded-2xl icon-container-base mb-6 group-hover:bg-primary group-hover:scale-110 transition-all">
                 <feature.icon className="size-7 group-hover:text-primary-foreground transition-colors" />
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">
+
+              {/* text-balance evita que el título de la feature se rompa de forma irregular */}
+              <h3 className="text-xl font-semibold text-foreground mb-3 text-balance">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground text-justify">
+
+              {/* Justificado optimizado para las descripciones de las tarjetas */}
+              <p className="text-muted-foreground text-justify text-pretty hyphens-auto leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
