@@ -13,7 +13,7 @@
   "attributes": {
     "image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "allowedTypes": [
         "images"
@@ -38,6 +38,38 @@
       "relation": "oneToOne",
       "target": "api::category.category",
       "inversedBy": "project"
+    },
+    "create_date": {
+      "type": "date",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": false
+    },
+    "content_media": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "status_project": {
+      "type": "boolean",
+      "default": true
+    },
+    "stacks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::stack.stack",
+      "inversedBy": "projects"
     }
   }
 }

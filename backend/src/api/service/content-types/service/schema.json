@@ -28,6 +28,12 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "mappedBy": "services"
+    },
+    "quotes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::quote.quote",
+      "mappedBy": "services"
     }
   }
 }

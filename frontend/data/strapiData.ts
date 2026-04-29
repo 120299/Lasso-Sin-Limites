@@ -22,6 +22,24 @@ const QUERY_CATEGORIES = {
   },
 };
 
+// Configuración específica para el modelo de la imagen (Projects)
+const QUERY_PROJECTS = {
+  fields: ["name", "slug", "url"],
+  populate: {
+    image: {
+      fields: ["url"],
+    },
+    stack: {
+      fields: ["name"],
+      populate: {
+        logo: {
+          fields: ["url"],
+        },
+      },
+    },
+  },
+};
+
 // 1. Función base genérica (se mantiene privada o interna)
 async function fetchFromStrapi(path: string) {
   try {
@@ -68,4 +86,13 @@ export async function getCategories() {
         ? `${STRAPI_API_URL}${item.video.url}`
         : null,
   }));
+}
+
+// Obtener Proyectos (Basado en tu captura de Strapi)
+export async function getProjects() {
+  const query = qs.stringify(QUERY_PROJECTS);
+  const response = await fetchFromStrapi(`/api/projects?${query}`);
+
+  if (!response?.data) return [];
+  return response.data;
 }

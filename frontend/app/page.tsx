@@ -8,11 +8,13 @@ import Portfolio from "@/components/Portfolio";
 import { StatsSection } from "@/components/StatsSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import ServicesModule from "@/components/ServicesSection";
-import { getStacks, getCategories } from "@/data/strapiData";
+import { getStacks, getCategories, getProjects } from "@/data/strapiData";
 export default async function Home() {
   const listStacks = await getStacks();
   const listCategoris = await getCategories();
-  console.log(listCategoris);
+  const listProjects = await getProjects();
+
+  console.log(listProjects);
   return (
     <div className="min-h-screen bg-background">
       <Header />
