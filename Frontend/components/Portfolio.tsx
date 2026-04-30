@@ -2,14 +2,19 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { projects as allProjects } from "@/data/data";
 import { ChevronDown, X, ExternalLink } from "lucide-react";
 import { TitleSection } from "./TitleSection";
+import { Project } from "@/types/strapi";
 
 const ITEMS_DESKTOP = 6;
 const ITEMS_MOBILE = 3;
 
-export default function Portfolio() {
+interface PortfolioProps {
+  data: Project[];
+}
+
+export default function Portfolio({ data }: PortfolioProps) {
+  const allProjects = data;
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [visibleCount, setVisibleCount] = useState(ITEMS_DESKTOP);
   const [selectedProject, setSelectedProject] = useState<
@@ -111,8 +116,8 @@ export default function Portfolio() {
                   >
                     {/* IMG Estándar con soporte para cualquier URL */}
                     <img
-                      src={project.image}
-                      alt={project.title}
+                      src={project.imageUrl}
+                      alt={project.name}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                       decoding="async"
@@ -121,9 +126,9 @@ export default function Portfolio() {
 
                     <div className="absolute inset-0 p-6 flex flex-col justify-end z-20">
                       <h3 className="text-xl font-bold text-white mb-1 truncate">
-                        {project.title}
+                        {project.name}
                       </h3>
-                      <p className="text-xs text-white/70 line-clamp-2 mb-4 leading-relaxed">
+                      <p className="text-xs text-justify text-white/70 line-clamp-2 mb-4 leading-relaxed">
                         {project.description}
                       </p>
 
@@ -131,10 +136,10 @@ export default function Portfolio() {
                         <div className="flex items-center gap-1.5 overflow-hidden">
                           {project.tags.slice(0, 3).map((tag) => (
                             <span
-                              key={tag}
+                              key={tag.id}
                               className="text-[9px] bg-white/10 backdrop-blur-md px-2.5 py-1 rounded text-white/90 border border-white/10"
                             >
-                              {tag}
+                              {tag.name}
                             </span>
                           ))}
                           {project.tags.length > 3 && (
@@ -188,8 +193,8 @@ export default function Portfolio() {
             >
               <div className="relative aspect-video">
                 <img
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
+                  src={selectedProject.imageUrl}
+                  alt={selectedProject.name}
                   className="w-full h-full object-cover rounded-t-[2.5rem]"
                 />
                 <button
@@ -202,22 +207,22 @@ export default function Portfolio() {
               <div className="p-8 md:p-10">
                 <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
                   <h2 className="text-2xl md:text-3xl font-bold">
-                    {selectedProject.title}
+                    {selectedProject.name}
                   </h2>
                   <span className="text-xs font-bold bg-blue-600 text-white px-4 py-2 rounded-xl">
                     {selectedProject.category}
                   </span>
                 </div>
-                <p className="text-muted-foreground md:text-lg leading-relaxed mb-8">
+                <p className="text-muted-foreground text-justify md:text-lg leading-relaxed mb-8">
                   {selectedProject.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-10">
                   {selectedProject.tags.map((tag) => (
                     <span
-                      key={tag}
+                      key={tag.id}
                       className="text-sm font-semibold bg-zinc-100 dark:bg-zinc-800 px-4 py-2 rounded-xl"
                     >
-                      {tag}
+                      {tag.name}
                     </span>
                   ))}
                 </div>

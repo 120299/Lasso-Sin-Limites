@@ -10,10 +10,13 @@ import { TestimonialsSection } from "@/components/TestimonialsSection";
 import ServicesModule from "@/components/ServicesSection";
 import { getStacks } from "@/services/stacks";
 import { getCategories } from "@/services/categories";
-import { SERVICES_DATA } from "@/data/data";
+import { getProjects } from "@/services/projects";
+import { projects } from "@/data/data";
+
 export default async function Home() {
   const listStacks = await getStacks();
   const listCategoris = await getCategories();
+  const listProjects = await getProjects();
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +36,7 @@ export default async function Home() {
         />
         <FeaturesSection />
         <StatsSection />
-        <Portfolio />
+        <Portfolio data={listProjects} />
         <TestimonialsSection />
         <ContactSection />
       </main>
