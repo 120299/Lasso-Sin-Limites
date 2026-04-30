@@ -13,7 +13,7 @@ export interface Category {
   slug: string;
 }
 
-export interface Tag {
+export interface TagStacks {
   id: number;
   name: string;
 }
@@ -27,6 +27,14 @@ export interface Project {
   description: string;
   statusProject: string;
   imageUrl: string;
-  tags: Tag[];
+  tags: TagStacks[];
   category: string;
+}
+
+export interface Testimonial {
+  name: string;
+  date: string;
+  star: number;
+  content: string;
+  avatar: string;
 }

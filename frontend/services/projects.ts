@@ -2,8 +2,9 @@ import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
 import { STRAPI_URL } from "@/config/api";
 import { Project } from "@/types/strapi";
+import { cache } from "react";
 
-export async function getProjects() {
+export const getProjects = cache(async () => {
   const query = qs.stringify({
     fields: [
       "name",
@@ -35,4 +36,4 @@ export async function getProjects() {
       category: item.category.title,
     }),
   );
-}
+});

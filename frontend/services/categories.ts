@@ -2,8 +2,9 @@ import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
 import { formatAssetUrl, STRAPI_URL } from "@/config/api";
 import { Category } from "@/types/strapi";
+import { cache } from "react";
 
-export async function getCategories() {
+export const getCategories = cache(async () => {
   const query = qs.stringify({
     fields: ["title", "description", "slug"],
     populate: { image: { fields: ["url"] }, video: { fields: ["url"] } },
@@ -20,4 +21,4 @@ export async function getCategories() {
       slug: item.slug,
     }),
   );
-}
+});

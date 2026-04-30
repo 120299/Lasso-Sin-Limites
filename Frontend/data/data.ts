@@ -254,6 +254,7 @@ export const projects: Project[] = [
 type Testimonial = {
   name: string;
   date: string;
+  star: number;
   content: string;
   avatar: string;
 };
@@ -262,6 +263,7 @@ export const testimonials: Testimonial[] = [
   {
     name: "María García",
     date: "24 Jul 2024",
+    star: 5,
     content:
       "Lasso Sin Límites transformó nuestra visión en una realidad digital. El soporte 360 nos dio la tranquilidad que necesitábamos para escalar.",
     avatar: "MG",
@@ -269,6 +271,7 @@ export const testimonials: Testimonial[] = [
   {
     name: "Carlos Rodríguez",
     date: "18 Ago 2024",
+    star: 4,
     content:
       "Su capacidad para gestionar proyectos en diferentes países con tanta fluidez es impresionante. Un socio tecnológico de confianza.",
     avatar: "CR",

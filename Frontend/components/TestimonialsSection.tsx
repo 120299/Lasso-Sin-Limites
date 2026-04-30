@@ -6,10 +6,16 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Star } from "lucide-react";
 import { TitleSection } from "./TitleSection";
-import { testimonials } from "@/data/data";
 import { cn } from "@/lib/utils";
+import { Testimonial } from "@/types/strapi";
 
-export const TestimonialsSection = () => {
+interface TestimonialsSection {
+  data: Testimonial[];
+}
+
+export const TestimonialsSection = ({ data }: TestimonialsSection) => {
+  const testimonials = data;
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
@@ -84,7 +90,7 @@ export const TestimonialsSection = () => {
                   </div>
 
                   <div className="flex gap-1 mb-5">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(testimonial.star)].map((_, i) => (
                       <Star
                         key={i}
                         className="size-3.5 fill-primary text-primary transition-transform group-hover:scale-110"

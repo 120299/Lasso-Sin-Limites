@@ -17,6 +17,7 @@ export async function POST(request: Request) {
     stack: "stacks", // <--- Aquí conectas Strapi con tu código
     category: "categories",
     project: "projects",
+    testimonial: "testimonials",
   };
 
   const tagToInvalidate = tagsMap[model];
