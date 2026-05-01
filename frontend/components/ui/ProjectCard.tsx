@@ -1,72 +1,73 @@
-"use client";
 import { motion } from "framer-motion";
 import { Project } from "@/types/strapi";
+import { ArrowUpRight } from "lucide-react";
 
-interface ProjectCardProps {
+export function ProjectCard({
+  project,
+  index,
+  onClick,
+}: {
   project: Project;
   index: number;
-  onClick: (project: Project) => void;
-}
-
-export const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
+  onClick: () => void;
+}) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ delay: index * 0.05 }}
-      onClick={() => onClick(project)}
-      className="group relative flex flex-col bg-white border border-zinc-100 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer h-full"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onClick={onClick}
+      // Ajuste: Redondeado más moderado (2xl) y bordes más finos
+      className="group cursor-pointer bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/60 dark:border-white/5 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5"
     >
-      {/* Contenedor Imagen: Forzado a Cuadrado y Limpio */}
-      <div className="relative aspect-square bg-zinc-50 overflow-hidden">
+      {/* 1. Contenedor de Imagen: Ajuste de padding de la imagen para que no ocupe tanto aire */}
+      <div className="relative aspect-video sm:aspect-[4/3] bg-zinc-50/50 dark:bg-zinc-950/30 overflow-hidden">
         <img
           src={project.imageUrl}
           alt={project.name}
-          className="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-contain p-6 sm:p-8 transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        {/* Overlay sutil al hover */}
-        <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
+            <ArrowUpRight className="w-4 h-4 text-zinc-600 dark:text-zinc-300" />
+          </div>
+        </div>
       </div>
 
-      {/* Textos Cortos y Responsivos */}
-      <div className="p-5 flex flex-col flex-grow justify-between">
-        <div>
-          <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
-            {project.category}
-          </span>
-          <h3 className="text-lg md:text-xl font-bold text-zinc-900 mt-1 line-clamp-1">
-            {project.name}
-          </h3>
+      {/* 2. Cuerpo de información: Padding responsivo (p-5 en móvil, p-7 en desktop) */}
+      <div className="p-5 sm:p-7 border-t border-zinc-100 dark:border-white/5 flex flex-col gap-4">
+        {/* Título: Tamaño fluido text-lg a text-xl */}
+        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          {project.name}
+        </h3>
+
+        {/* Tags: Tamaño de fuente mínimo y espaciado ajustado */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag.id}
+              className="text-[10px] sm:text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/50 px-2.5 py-0.5 rounded-md"
+            >
+              #{tag.name}
+            </span>
+          ))}
+          {project.tags.length > 3 && (
+            <span className="text-[10px] text-zinc-400 self-center ml-1">
+              +{project.tags.length - 3}
+            </span>
+          )}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-zinc-50 pt-4">
-          <div className="flex gap-1.5 overflow-hidden">
-            {project.tags.slice(0, 2).map((tag) => (
-              <span key={tag.id} className="text-[10px] text-zinc-400">
-                #{tag.name}
-              </span>
-            ))}
-          </div>
-          <div className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white group-hover:bg-blue-600 transition-colors">
-            <PlusIcon />
-          </div>
+        {/* Categoría: Altura reducida y tracking optimizado */}
+        <div className="w-full">
+          <span className="flex items-center justify-center text-[9px] md:text-[10px] tracking-[0.25em] font-black uppercase bg-blue-600 text-white py-1.5 md:py-2 rounded-xl shadow-md">
+            {project.category}
+          </span>
         </div>
       </div>
     </motion.div>
   );
-};
-
-const PlusIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="3"
-  >
-    <path d="M12 5v14M5 12h14" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+}

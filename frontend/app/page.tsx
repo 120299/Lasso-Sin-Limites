@@ -63,7 +63,13 @@ export default async function Home() {
           sectionBackground="bg-slate-950"
           data={dataHomePage.sections[4].items}
         />
-        <Portfolio data={listProjects} />
+        <Portfolio
+          sectionTitle={dataHomePage.sections[5].title}
+          sectionTitleColor="text-gradient"
+          sectionDescription={dataHomePage.sections[5].content}
+          sectionBackground="bg-gray-100"
+          data={listProjects}
+        />
         <TestimonialsSection data={listTestimonials} />
         <ContactSection />
       </main>

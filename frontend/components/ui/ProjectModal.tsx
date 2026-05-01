@@ -1,60 +1,83 @@
-"use client";
-import { motion } from "framer-motion";
-import { X, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ExternalLink } from "lucide-react";
 import { Project } from "@/types/strapi";
 
-export const ProjectModal = ({
-  project,
-  onClose,
-}: {
-  project: Project;
+interface ProjectModalProps {
+  project: Project | null;
   onClose: () => void;
-}) => {
+}
+
+export function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-zinc-950/40 backdrop-blur-md flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.95, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.95, y: 20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="bg-white w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl"
-      >
-        <div className="relative aspect-[16/10] bg-zinc-50 border-b">
-          <img
-            src={project.imageUrl}
-            className="w-full h-full object-contain p-12"
-          />
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 p-2 bg-white rounded-full shadow-lg hover:text-red-500 transition-colors"
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white dark:bg-zinc-900 rounded-[2.5rem] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
           >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-        <div className="p-8 md:p-12 text-center">
-          <span className="text-blue-600 font-bold text-xs uppercase tracking-widest">
-            {project.category}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mt-3 mb-5 tracking-tight">
-            {project.name}
-          </h2>
-          <p className="text-zinc-500 text-base md:text-lg leading-relaxed mb-8 max-w-md mx-auto">
-            {project.description}
-          </p>
-          <a
-            href="#"
-            className="inline-flex items-center gap-3 bg-zinc-900 text-white px-10 py-4 rounded-full font-bold text-sm hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/20"
-          >
-            Ver proyecto en vivo <ArrowUpRight className="w-4 h-4" />
-          </a>
-        </div>
-      </motion.div>
-    </motion.div>
+            <div className="relative aspect-video">
+              <img
+                src={project.imageUrl}
+                alt={project.name}
+                className="w-full h-full object-contain rounded-t-[2.5rem]"
+              />
+              <button
+                onClick={onClose}
+                className="absolute top-6 right-6 p-2 bg-black/40 backdrop-blur-md rounded-full text-white hover:bg-blue-600 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-8 md:p-10">
+              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  {project.name}
+                </h2>
+                <span className="text-xs font-bold bg-blue-600 text-white px-4 py-2 rounded-xl">
+                  {project.category}
+                </span>
+              </div>
+              <p className="text-muted-foreground text-justify md:text-lg leading-relaxed mb-8 line-clamp-6">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-10">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag.id}
+                    className="text-sm font-semibold bg-zinc-100 dark:bg-zinc-800 px-4 py-2 rounded-xl"
+                  >
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#"
+                  className="flex-1 py-4 bg-blue-600 text-white text-center rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
+                >
+                  Visitar sitio <ExternalLink className="w-4 h-4" />
+                </a>
+                <button
+                  onClick={onClose}
+                  className="px-8 py-4 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-bold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
-};
+}
