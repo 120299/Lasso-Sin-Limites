@@ -70,7 +70,13 @@ export default async function Home() {
           sectionBackground="bg-gray-100"
           data={listProjects}
         />
-        <TestimonialsSection data={listTestimonials} />
+        <TestimonialsSection
+          sectionTitle={dataHomePage.sections[6].title}
+          sectionTitleColor="text-white"
+          sectionDescription={dataHomePage.sections[6].content}
+          sectionBackground="bg-slate-950"
+          data={listTestimonials}
+        />
         <ContactSection />
       </main>
       <Footer />

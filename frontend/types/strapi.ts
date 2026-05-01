@@ -33,6 +33,7 @@ export interface Project {
 }
 
 export interface Testimonial {
+  id: number;
   name: string;
   date: string;
   star: number;
