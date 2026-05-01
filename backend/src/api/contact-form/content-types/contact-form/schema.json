@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_forms",
+  "info": {
+    "singularName": "contact-form",
+    "pluralName": "contact-forms",
+    "displayName": "ContactForm"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "tel": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "date_contact": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text",
+      "required": false
+    },
+    "date_response": {
+      "type": "datetime"
+    },
+    "response": {
+      "type": "text",
+      "required": false
+    }
+  }
+}

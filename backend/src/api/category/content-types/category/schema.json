@@ -45,9 +45,9 @@
       "target": "api::service.service",
       "inversedBy": "categories"
     },
-    "project": {
+    "projects": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::project.project",
       "mappedBy": "category"
     }
