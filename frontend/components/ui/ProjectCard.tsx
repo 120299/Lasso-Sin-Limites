@@ -20,7 +20,7 @@ export function ProjectCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onClick={onClick}
       // Ajuste: Redondeado más moderado (2xl) y bordes más finos
-      className="group cursor-pointer bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/60 dark:border-white/5 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5"
+      className="group cursor-pointer bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/60 dark:border-white/5 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5 z-10"
     >
       {/* 1. Contenedor de Imagen: Ajuste de padding de la imagen para que no ocupe tanto aire */}
       <div className="relative aspect-video sm:aspect-[4/3] bg-zinc-50/50 dark:bg-zinc-950/30 overflow-hidden">
@@ -51,7 +51,7 @@ export function ProjectCard({
               key={tag.id}
               className="text-[10px] sm:text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/50 px-2.5 py-0.5 rounded-md"
             >
-              #{tag.name}
+              {tag.name}
             </span>
           ))}
           {project.tags.length > 3 && (

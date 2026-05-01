@@ -19,7 +19,7 @@ export const Section = ({
     <section
       className={`py-20 relative overflow-hidden transition-colors duration-500 ${sectionBackground}`}
     >
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative">
         <TitleSection
           title={sectionTitle}
           description={sectionDescription}

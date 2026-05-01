@@ -54,7 +54,7 @@ export const TestimonialsSection = ({
       sectionDescription={sectionDescription}
       sectionBackground={sectionBackground}
     >
-      <div className="overflow-hidden my-10" ref={emblaRef}>
+      <div className="overflow-hidden my-4" ref={emblaRef}>
         <div className="flex -ml-4">
           {data.map((testimonial, index) => (
             <TestimonialCard

@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { Project } from "@/types/strapi";
@@ -8,6 +11,18 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  // Bloquear el scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (project) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [project]);
+
   return (
     <AnimatePresence>
       {project && (
@@ -15,64 +30,72 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 bg-black/90 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white dark:bg-zinc-900 rounded-[2.5rem] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+            className="bg-white dark:bg-zinc-900 rounded-[2rem] max-w-2xl w-full max-h-[85vh] overflow-y-auto no-scrollbar shadow-2xl relative border border-zinc-200 dark:border-zinc-800"
           >
-            <div className="relative aspect-video">
+            {/* Botón de cierre flotante y fijo */}
+            <div className="sticky top-0 z-50 w-full flex justify-end p-4 pointer-events-none">
+              <button
+                onClick={onClose}
+                className="pointer-events-auto p-2 bg-black/50 hover:bg-red-500 backdrop-blur-xl rounded-full text-white transition-all shadow-lg"
+                aria-label="Cerrar modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Contenedor de Imagen con ajuste negativo para el header */}
+            <div className="relative w-full overflow-hidden">
               <img
                 src={project.imageUrl}
                 alt={project.name}
-                className="w-full h-full object-contain rounded-t-[2.5rem]"
+                className="w-full max-h-[300px] object-contain" // 'object-cover' llena el espacio sin dejar huecos
               />
-              <button
-                onClick={onClose}
-                className="absolute top-6 right-6 p-2 bg-black/40 backdrop-blur-md rounded-full text-white hover:bg-blue-600 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
             </div>
-            <div className="p-8 md:p-10">
-              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <h2 className="text-2xl md:text-3xl font-bold">
+
+            {/* Contenido */}
+            <div className="px-6 pb-10 pt-2 sm:px-12 sm:pb-12 relative">
+              <header className="flex flex-col gap-2 my-6">
+                <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-900 dark:text-white">
                   {project.name}
                 </h2>
-                <span className="text-xs font-bold bg-blue-600 text-white px-4 py-2 rounded-xl">
-                  {project.category}
-                </span>
-              </div>
-              <p className="text-muted-foreground text-justify md:text-lg leading-relaxed mb-8 line-clamp-6">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-10">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="text-sm font-semibold bg-zinc-100 dark:bg-zinc-800 px-4 py-2 rounded-xl"
+              </header>
+
+              <div className="space-y-6">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed line-clamp-4 text-justify">
+                  {project.description}
+                </p>
+
+                {/* Tags / Tecnologías */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag.id}
+                      className="text-[11px] font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-700"
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Call to Action */}
+                <div className="pt-4">
+                  <a
+                    href="#" // Aquí iría project.url si existe
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-[0.98] gap-2"
                   >
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#"
-                  className="flex-1 py-4 bg-blue-600 text-white text-center rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
-                >
-                  Visitar sitio <ExternalLink className="w-4 h-4" />
-                </a>
-                <button
-                  onClick={onClose}
-                  className="px-8 py-4 bg-zinc-100 dark:bg-zinc-800 rounded-2xl font-bold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-                >
-                  Cerrar
-                </button>
+                    Ver Proyecto <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
