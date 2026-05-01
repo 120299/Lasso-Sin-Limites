@@ -50,7 +50,6 @@ export const StatsSection = () => {
       className="py-24 bg-slate-950 text-white overflow-hidden relative"
     >
       {/* Decoración de fondo (Opcional) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(112, 10, 10, 0.05)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="container relative z-10 px-6">
         <motion.div

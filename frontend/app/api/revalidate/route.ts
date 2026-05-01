@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     category: "categories",
     project: "projects",
     testimonial: "testimonials",
+    home_page: "home-page",
   };
 
   const tagToInvalidate = tagsMap[model];

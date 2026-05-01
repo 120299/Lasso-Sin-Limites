@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_layout_title_sections",
+  "info": {
+    "displayName": "Title Section",
+    "icon": "write"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

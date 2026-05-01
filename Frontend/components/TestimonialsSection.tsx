@@ -100,7 +100,7 @@ export const TestimonialsSection = ({ data }: TestimonialsSection) => {
                   </div>
 
                   {/* Texto del testimonio optimizado para lectura en móvil */}
-                  <p className="text-muted-foreground leading-relaxed text-justify text-pretty hyphens-auto italic">
+                  <p className="text-muted-foreground leading-relaxed  text-pretty hyphens-auto italic">
                     "{testimonial.content}"
                   </p>
                 </motion.div>
