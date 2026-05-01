@@ -25,8 +25,6 @@ export default async function Home() {
   const listPartners = await getPartners();
   const dataHomePage = await getHomePage();
 
-  console.log(listProjects);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
