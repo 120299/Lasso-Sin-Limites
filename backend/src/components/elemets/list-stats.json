@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_elemets_list_stats",
+  "info": {
+    "displayName": "list-stats",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "component": "layout.stat",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

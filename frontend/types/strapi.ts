@@ -1,7 +1,8 @@
 export interface Stack {
+  length: number;
   id: number;
   name: string;
-  logoUrl: string | null;
+  logoUrl: string | "";
 }
 
 export interface Category {
@@ -37,4 +38,32 @@ export interface Testimonial {
   star: number;
   content: string;
   avatar: string;
+}
+
+export interface Feature {
+  id: number;
+  icon: string | "";
+  title: string;
+  content: string;
+}
+
+export interface CounterProps {
+  from: number;
+  to: number;
+  duration?: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+}
+
+export interface Stat {
+  id: number;
+  label: string;
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  icon: string | "";
+  color: string;
+  bgColor: string;
+  isDecimal?: boolean;
 }

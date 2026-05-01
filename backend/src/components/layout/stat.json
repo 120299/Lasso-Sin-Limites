@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_layout_stats",
+  "info": {
+    "displayName": "Stat",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "integer",
+      "required": true
+    },
+    "suffix": {
+      "type": "string"
+    },
+    "prefix": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "bgColor": {
+      "type": "string",
+      "required": true
+    },
+    "isDecimal": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

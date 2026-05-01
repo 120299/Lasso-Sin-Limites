@@ -33,7 +33,7 @@ export const getProjects = cache(async () => {
       statusProject: item.status_project,
       imageUrl: STRAPI_URL + (item.image?.url || ""),
       tags: item.stacks || [],
-      category: item.category.title,
+      category: item.category?.title || "",
     }),
   );
 });

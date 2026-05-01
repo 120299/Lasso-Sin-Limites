@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elemets_list_features",
+  "info": {
+    "displayName": "list-feature"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "component": "layout.feature",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

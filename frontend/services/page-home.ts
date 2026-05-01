@@ -1,17 +1,28 @@
 import { cache } from "react";
 import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
-import { formatAssetUrl } from "@/config/api";
-import { Stack } from "@/types/strapi";
 
 // Usamos cache para que Next.js 15 no repita la lógica en un mismo renderizado
 export const getHomePage = cache(async () => {
   const query = qs.stringify(
     {
-      fields: ["name"],
       populate: {
         sections: {
-          populate: "*",
+          on: {
+            "layout.title-section": {
+              populate: "*",
+            },
+            "elemets.list-feature": {
+              populate: {
+                items: "*",
+              },
+            },
+            "elemets.list-stats": {
+              populate: {
+                items: "*",
+              },
+            },
+          },
         },
       },
     },

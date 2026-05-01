@@ -1,4 +1,3 @@
-import { Category } from "@/types/strapi";
 import * as Icons from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 
@@ -118,16 +117,7 @@ export interface Stat {
   isDecimal?: boolean;
 }
 
-export interface CounterProps {
-  from: number;
-  to: number;
-  duration?: number;
-  suffix?: string;
-  prefix?: string;
-  decimals?: number;
-}
-
-// Simulamos que estos nombres vienen de Strapi como strings
+export // Simulamos que estos nombres vienen de Strapi como strings
 const rawStats = [
   {
     icon: "History",
