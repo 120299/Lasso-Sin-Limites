@@ -40,7 +40,7 @@ export function ProjectCard({
       {/* 2. Cuerpo de información: Padding responsivo (p-5 en móvil, p-7 en desktop) */}
       <div className="p-5 sm:p-7 border-t border-zinc-100 dark:border-white/5 flex flex-col gap-4">
         {/* Título: Tamaño fluido text-lg a text-xl */}
-        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-center">
           {project.name}
         </h3>
 

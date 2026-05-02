@@ -29,6 +29,13 @@ export const ContactSection = () => {
       required: true,
     },
     {
+      name: "email",
+      label: "Email",
+      type: "email",
+      placeholder: "Ej: juan@empresa.com",
+      required: true,
+    },
+    {
       name: "message",
       label: "Tu mensaje",
       type: "textarea",
