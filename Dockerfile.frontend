@@ -1,19 +1,26 @@
-# ETAPA 1: Construcción (Build)
-FROM node:18-alpine AS build
+# 1. Imagen de base
+FROM node:18-alpine
+
+# 2. Instalamos pnpm
 RUN npm install -g pnpm
+
+# 3. Carpeta de trabajo
 WORKDIR /app
 
-# Copiamos archivos de la carpeta frontend
+# 4. Dependencias (usando tu estructura de subcarpetas)
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Copiamos el resto del código y buildeamos
+# 5. Copiamos el código del frontend
 COPY frontend/ .
+
+# 6. Construcción de Next.js
+# Esto genera la carpeta .next
 RUN pnpm run build
 
-# ETAPA 2: Servidor de producción (Nginx)
-FROM nginx:stable-alpine
-# Copiamos el resultado del build a la carpeta que usa Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# 7. Puerto por defecto de Next.js
+EXPOSE 3001
+
+# 8. Comando de arranque
+# Importante: Next.js usa 'next start' para producción
+CMD ["pnpm", "start"]
