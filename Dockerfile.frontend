@@ -1,29 +1,27 @@
-# 1. Etapa de construcción (Build)
-FROM node:20-alpine AS builder
+# 1. Elegimos la imagen de base (Node.js)
+FROM node:18-alpine
+
+# 2. Instalamos pnpm globalmente dentro del contenedor
 RUN npm install -g pnpm
+
+# 3. Creamos y entramos a la carpeta de trabajo
 WORKDIR /app
 
-# Copiamos solo los archivos de dependencias para aprovechar el cache de Docker
+# 4. Copiamos los archivos de dependencias PRIMERO
+# (Copiamos desde la subcarpeta backend de tu GitHub)
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
+
+# 5. Instalamos las dependencias
 RUN pnpm install --frozen-lockfile
 
-# Copiamos el código fuente y construimos la aplicación
+# 6. Copiamos el resto del código del backend
 COPY frontend/ .
+
+# 7. Construimos el proyecto (build)
 RUN pnpm run build
 
-# 2. Etapa de ejecución (Runner)
-FROM node:20-alpine AS runner
-WORKDIR /app
-
-# Copiamos solo lo necesario desde la etapa anterior para que la imagen sea ligera
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/pnpm-lock.yaml ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-
-# Exponemos el puerto 3001 para no chocar con Dokploy
+# 8. Exponemos el puerto 
 EXPOSE 3001
 
-# Iniciamos Next.js indicándole el puerto explícitamente
-CMD ["npx", "next", "start", "-p", "3001"]
+# 9. Comando para arrancar la aplicación
+CMD ["pnpm", "start"]
