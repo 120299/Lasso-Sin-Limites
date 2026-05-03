@@ -3,32 +3,27 @@ import { STRAPI_URL } from "@/config/api";
 export async function strapiFetch(path: string, tag: string) {
   try {
     const response = await fetch(`${STRAPI_URL}${path}`, {
-      next: { tags: [tag] },
-      // Es buena práctica añadir headers para asegurar que recibes JSON
+      next: {
+        tags: [tag],
+        // Forzamos a que no se considere "fresco" si el tag se invalida
+        revalidate: 0,
+      },
       headers: {
         "Content-Type": "application/json",
+        // Evitamos que el navegador guarde una copia en su propia caché
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        Pragma: "no-cache",
       },
     });
 
-    // Manejo de errores de respuesta (404, 500, etc.)
     if (!response.ok) {
-      console.error(
-        `[Strapi Error]: ${response.status} - ${response.statusText} en ${path}`,
-      );
+      console.error(`[Strapi Error]: ${response.status} en ${path}`);
       return null;
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
-    // Manejo de errores de red o errores de ejecución del código
-    console.error(
-      `[Fetch Error]: Fallo al conectar con Strapi en ${path}`,
-      error,
-    );
-
-    // Retornamos null para que el componente que llama a esta función
-    // pueda manejar la ausencia de datos sin colapsar.
+    console.error(`[Fetch Error]: ${error}`);
     return null;
   }
 }

@@ -17,6 +17,10 @@ import { getTestimonials } from "@/services/testimonials";
 import { getHomePage } from "@/services/page-home";
 import { getPartners } from "@/services/partners";
 
+// Forzar a que la página no sea estática
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Home() {
   const listStacks = await getStacks();
   const listCategoris = await getCategories();

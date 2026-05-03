@@ -4,31 +4,30 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const authToken = request.headers.get("Authorization");
 
-  // Seguridad: comparamos con tu .env.local
   if (authToken !== process.env.STRAPI_REVALIDATE_TOKEN) {
     return NextResponse.json({ message: "No autorizado" }, { status: 401 });
   }
 
+  // PASO CLAVE: Esperar a que la base de datos de Strapi se asiente
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
   const body = await request.json();
   const model = body.model || body.entry?.model;
 
-  // Mapa: Si Strapi dice "stack", Next.js limpia el tag "stacks"
   const tagsMap: Record<string, string> = {
-    stack: "stacks", // <--- Aquí conectas Strapi con tu código
     category: "categories",
     project: "projects",
-    testimonial: "testimonials",
-    home_page: "home-page",
-    partner: "partners",
+    // Agrega aquí los modelos que necesites
   };
 
   const tagToInvalidate = tagsMap[model];
 
   if (tagToInvalidate) {
-    // Usamos "max" para cumplir con Next.js 15 y evitar el aviso amarillo
+    // Usamos "max" si tu versión de Next.js lo requiere según el error visto
     revalidateTag(tagToInvalidate, "max");
-    return NextResponse.json({ revalidated: true });
+    console.log("funciona");
+    return NextResponse.json({ revalidated: true, tag: tagToInvalidate });
   }
 
-  return NextResponse.json({ message: "Nada que revalidar" });
+  return NextResponse.json({ message: "No hay tag para este modelo" });
 }
