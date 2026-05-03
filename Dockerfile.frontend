@@ -1,30 +1,29 @@
-# 1. Etapa de construcción
-FROM node:20-alpine AS build
+# 1. Etapa de construcción (Build)
+FROM node:20-alpine AS builder
 RUN npm install -g pnpm
 WORKDIR /app
 
-# Copiamos archivos de dependencias
+# Copiamos solo los archivos de dependencias para aprovechar el cache de Docker
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Copiamos el código y construimos
+# Copiamos el código fuente y construimos la aplicación
 COPY frontend/ .
 RUN pnpm run build
 
-# 2. Etapa de ejecución (Usamos Node, NO Nginx)
+# 2. Etapa de ejecución (Runner)
 FROM node:20-alpine AS runner
 WORKDIR /app
-RUN npm install -g pnpm
 
-# Copiamos lo necesario desde la etapa de construcción
-COPY --from=build /app/package.json ./
-COPY --from=build /app/pnpm-lock.yaml ./
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/node_modules ./node_modules
+# Copiamos solo lo necesario desde la etapa anterior para que la imagen sea ligera
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/pnpm-lock.yaml ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
 
-# Exponemos el puerto 3001 para evitar conflictos con Dokploy
+# Exponemos el puerto 3001 para no chocar con Dokploy
 EXPOSE 3001
 
-# Comando para iniciar Next.js en el puerto 3001
-CMD ["pnpm", "start", "--", "-p", "3001"]
+# Iniciamos Next.js indicándole el puerto explícitamente
+CMD ["npx", "next", "start", "-p", "3001"]
