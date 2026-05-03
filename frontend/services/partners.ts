@@ -2,7 +2,7 @@ import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
 import { formatAssetUrl } from "@/config/api";
 
-export async function getpartners() {
+export async function getPartners() {
   const query = qs.stringify({
     fields: ["name"],
     populate: { logo: { fields: ["url"] } },
