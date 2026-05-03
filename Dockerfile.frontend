@@ -17,8 +17,6 @@ RUN pnpm install --frozen-lockfile
 # 6. Copiamos el resto del código del backend
 COPY frontend/ .
 
-ARG NEXT_PUBLIC_STRAPI_URL
-ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
 # 7. Construimos el proyecto (build)
 RUN pnpm run build
 
