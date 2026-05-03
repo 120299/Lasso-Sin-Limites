@@ -1,5 +1,4 @@
 export interface Stack {
-  length: number;
   id: number;
   name: string;
   logoUrl: string | "";

@@ -16,6 +16,7 @@ export const getTestimonials = cache(async () => {
   // Al poner : Stack aquí, TypeScript sabe que devuelves una lista de Stacks
   return (res?.data || []).map(
     (item: any): Testimonial => ({
+      id: item.id,
       name: item.name,
       date: item.date,
       star: item.star,

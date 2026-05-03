@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { contactInfo } from "../data/data";
+import { contactInfo } from "@/data/data";
 
 export const ContactInfo = () => {
   return (

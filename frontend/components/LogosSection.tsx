@@ -68,13 +68,16 @@ export const LogosSection = ({
                 key={`${partner.name}-${index}`}
                 className="relative w-28 h-12 md:w-36 md:h-14 flex-shrink-0"
               >
-                <Image
-                  src={partner.logoUrl}
-                  alt={`Logo de ${partner.name}`}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 112px, 144px"
-                />
+                {partner.logoUrl && (
+                  <Image
+                    src={partner.logoUrl} // Ya no necesitas el || "" porque el && asegura que existe
+                    alt={`Logo de ${partner.name}`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 112px, 144px"
+                    loading="lazy"
+                  />
+                )}
               </div>
             ))}
           </motion.div>
