@@ -1,18 +1,32 @@
+# 1. Usamos Node 20 sobre Alpine (una versión de Linux muy ligera)
 FROM node:20-alpine
+
+# 2. Instalamos pnpm de forma global
 RUN npm install -g pnpm
+
+# 3. Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
+# 4. Copiamos solo los archivos de dependencias primero
+# Esto ayuda a que Docker cachee las librerías y no las reinstale si no han cambiado
 COPY frontend/package.json frontend/pnpm-lock.yaml ./
+
+# 5. Instalamos las dependencias
 RUN pnpm install --frozen-lockfile
 
+# 6. Copiamos todo el código del frontend al contenedor
 COPY frontend/ .
 
-# --- ESTO ES LO QUE ESTÁ FALTANDO ---
-ARG NEXT_PUBLIC_STRAPI_URL
-ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL
-# ------------------------------------
+# 7. DEFINICIÓN DE LA URL (Aquí es donde ocurre la magia)
+# Al ponerla aquí, Next.js la detecta durante el comando 'build'
+ENV NEXT_PUBLIC_STRAPI_URL=https://strapi.lasso.com.es
 
+# 8. Ejecutamos el build de Next.js
+# Ahora que la URL existe, el 'Fetch Error' desaparecerá
 RUN pnpm run build
 
-EXPOSE 3001
+# 9. Exponemos el puerto que usa Next.js (por defecto 3000 o 3001 según tu config)
+EXPOSE 3000
+
+# 10. Comando para iniciar la aplicación en modo producción
 CMD ["pnpm", "start"]
