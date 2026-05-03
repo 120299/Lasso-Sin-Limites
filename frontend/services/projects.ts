@@ -1,10 +1,8 @@
 import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
-import { STRAPI_URL } from "@/config/api";
-import { Project } from "@/types/strapi";
-import { cache } from "react";
+import { formatAssetUrl } from "@/config/api";
 
-export const getProjects = cache(async () => {
+export async function getProjects() {
   const query = qs.stringify({
     fields: [
       "name",
@@ -20,20 +18,19 @@ export const getProjects = cache(async () => {
       stacks: { fields: ["name"] },
     },
   });
+
   const res = await strapiFetch(`/api/projects?${query}`, "projects");
 
-  return (res?.data || []).map(
-    (item: any): Project => ({
-      id: item.id,
-      name: item.name,
-      slug: item.slug,
-      createDate: item.create_date,
-      url: item.url,
-      description: item.description,
-      statusProject: item.status_project,
-      imageUrl: STRAPI_URL + (item.image?.url || ""),
-      tags: item.stacks || [],
-      category: item.category?.title || "",
-    }),
-  );
-});
+  return (res?.data || []).map((item: any) => ({
+    id: item.id,
+    name: item.name,
+    slug: item.slug,
+    createDate: item.create_date,
+    url: item.url,
+    description: item.description,
+    statusProject: item.status_project,
+    imageUrl: formatAssetUrl(item.image?.url) || "", // Usa formatAssetUrl[cite: 1]
+    tags: item.stacks || [],
+    category: item.category?.title || "",
+  }));
+}

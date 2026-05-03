@@ -8,26 +8,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "No autorizado" }, { status: 401 });
   }
 
-  // PASO CLAVE: Esperar a que la base de datos de Strapi se asiente
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  // Esperar a que Strapi termine de guardar el video en disco[cite: 4]
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const body = await request.json();
   const model = body.model || body.entry?.model;
 
   const tagsMap: Record<string, string> = {
+    stack: "stacks",
     category: "categories",
     project: "projects",
-    // Agrega aquí los modelos que necesites
+    testimonial: "testimonials",
+    home_page: "home-page",
+    partner: "partners",
   };
 
   const tagToInvalidate = tagsMap[model];
 
   if (tagToInvalidate) {
-    // Usamos "max" si tu versión de Next.js lo requiere según el error visto
+    // Usamos "max" para asegurar una limpieza total según tu versión de Next.js[cite: 4]
     revalidateTag(tagToInvalidate, "max");
-    console.log("funciona");
     return NextResponse.json({ revalidated: true, tag: tagToInvalidate });
   }
 
-  return NextResponse.json({ message: "No hay tag para este modelo" });
+  return NextResponse.json({ message: "Nada que revalidar" });
 }

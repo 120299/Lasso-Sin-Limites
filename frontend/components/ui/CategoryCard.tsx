@@ -9,7 +9,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ service, index }: CategoryCardProps) {
   return (
     <motion.a
-      key={service.id}
+      key={service.videoUrl}
       href={service.slug}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
