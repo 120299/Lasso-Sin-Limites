@@ -5,6 +5,7 @@ import { StatCard } from "./ui/StatCard";
 
 interface StatsSectionProps {
   data: Stat[];
+  sectionId?: string;
   sectionTitle: string;
   sectionTitleColor?: string;
   sectionDescription: string;
@@ -12,6 +13,7 @@ interface StatsSectionProps {
 }
 export default function StatsSection({
   data,
+  sectionId,
   sectionTitle,
   sectionTitleColor,
   sectionDescription,
@@ -19,6 +21,7 @@ export default function StatsSection({
 }: StatsSectionProps) {
   return (
     <Section
+      sectionId={sectionId}
       sectionTitle={sectionTitle}
       sectionTitleColor={sectionTitleColor}
       sectionDescription={sectionDescription}

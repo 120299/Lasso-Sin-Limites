@@ -14,8 +14,9 @@ import { getStacks } from "@/services/stacks";
 import { getCategories } from "@/services/categories";
 import { getProjects } from "@/services/projects";
 import { getTestimonials } from "@/services/testimonials";
-import { getHomePage } from "@/services/page-home";
+import { getHomePage } from "@/services/pageHome";
 import { getPartners } from "@/services/partners";
+import { getMenuPrimary } from "@/services/menuPrimary";
 
 // Forzar a que la página no sea estática
 export const dynamic = "force-dynamic";
@@ -27,7 +28,10 @@ export default async function Home() {
   const listProjects = await getProjects();
   const listTestimonials = await getTestimonials();
   const listPartners = await getPartners();
+  const menuPrimary = await getMenuPrimary();
   const dataHomePage = await getHomePage();
+
+  console.log(menuPrimary);
 
   return (
     <div className="min-h-screen bg-background">
@@ -37,19 +41,36 @@ export default async function Home() {
         <LogosSection
           title="Empresas que han trabajado con nosotros"
           data={listPartners}
-          backgorund="bg-gray-100"
+          background="bg-gray-100"
         />
         <ServicesSection
+          sectionId="servicios"
           sectionTitle={dataHomePage.sections[0].title}
           sectionTitleColor="text-gradient"
           sectionDescription={dataHomePage.sections[0].content}
           sectionBackground="bg-white-100"
           data={listCategoris}
         />
+        <Portfolio
+          sectionId="portfolio"
+          sectionTitle={dataHomePage.sections[5].title}
+          sectionTitleColor="text-white"
+          sectionDescription={dataHomePage.sections[5].content}
+          sectionBackground="bg-slate-950"
+          data={listProjects}
+        />
         <LogosSection
           title="Nuestro Stack Tecnológico"
           data={listStacks}
-          backgorund="bg-gray-100"
+          background="bg-gray-100"
+        />
+        <StatsSection
+          sectionId="experiencia"
+          sectionTitle={dataHomePage.sections[3].title}
+          sectionTitleColor="text-white"
+          sectionDescription={dataHomePage.sections[3].content}
+          sectionBackground="bg-slate-950"
+          data={dataHomePage.sections[4].items}
         />
         <FeaturesSection
           sectionTitle={dataHomePage.sections[1].title}
@@ -58,21 +79,9 @@ export default async function Home() {
           sectionBackground="bg-white-100"
           data={dataHomePage.sections[2].items}
         />
-        <StatsSection
-          sectionTitle={dataHomePage.sections[3].title}
-          sectionTitleColor="text-white"
-          sectionDescription={dataHomePage.sections[3].content}
-          sectionBackground="bg-slate-950"
-          data={dataHomePage.sections[4].items}
-        />
-        <Portfolio
-          sectionTitle={dataHomePage.sections[5].title}
-          sectionTitleColor="text-gradient"
-          sectionDescription={dataHomePage.sections[5].content}
-          sectionBackground="bg-gray-100"
-          data={listProjects}
-        />
+
         <TestimonialsSection
+          sectionId="testimonios"
           sectionTitle={dataHomePage.sections[6].title}
           sectionTitleColor="text-white"
           sectionDescription={dataHomePage.sections[6].content}

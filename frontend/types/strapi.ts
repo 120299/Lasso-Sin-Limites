@@ -67,3 +67,8 @@ export interface Stat {
   bgColor: string;
   isDecimal?: boolean;
 }
+
+export interface MenuPrimary {
+  label: string;
+  href: string;
+}

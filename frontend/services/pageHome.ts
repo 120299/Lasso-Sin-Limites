@@ -1,9 +1,8 @@
-import { cache } from "react";
 import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
 
 // Usamos cache para que Next.js 15 no repita la lógica en un mismo renderizado
-export const getHomePage = cache(async () => {
+export async function getHomePage() {
   const query = qs.stringify(
     {
       populate: {
@@ -36,4 +35,4 @@ export const getHomePage = cache(async () => {
 
   // Al poner : Stack aquí, TypeScript sabe que devuelves una lista de Stacks
   return res?.data;
-});
+}

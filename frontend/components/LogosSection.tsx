@@ -1,87 +1,66 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useAnimation } from "framer-motion";
-
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Stack } from "@/types/strapi";
 
 interface LogosSectionProps {
   title: string;
   data: Stack[];
-  backgorund: string;
+  background: string; // Corregido typo de 'backgorund'
 }
 
 export const LogosSection = ({
   title,
   data,
-  backgorund,
+  background,
 }: LogosSectionProps) => {
-  const controls = useAnimation();
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const startAnimation = async () => {
-    await controls.start({
-      x: ["0%", "-33.33%"],
-      transition: {
-        duration: 20, // Un poco más lento para mejor lectura
-        ease: "linear",
-        repeat: Infinity,
-      },
-    });
-  };
-
-  useEffect(() => {
-    if (data.length > 0) {
-      startAnimation();
-    }
-  }, [controls, data]); // 2. Añadido data a dependencias
+  // Duplicamos los datos para crear el efecto de scroll infinito sin saltos
+  const duplicatedData = [...data];
 
   return (
-    <section className={`py-14 ${backgorund} overflow-hidden`}>
-      <div className="container mx-auto px-4 my-2">
-        <p className="text-center text-md md:text-xl font-bold text-zinc-500 uppercase tracking-widest">
+    <section className={`py-16 ${background} overflow-hidden`}>
+      <div className="container mx-auto px-4 mb-10">
+        <p className="text-center text-sm md:text-base font-semibold text-zinc-500 uppercase tracking-[0.2em]">
           {title}
         </p>
       </div>
 
-      <div className="relative flex w-full" ref={containerRef}>
-        <div
-          className="flex overflow-hidden cursor-grab active:cursor-grabbing w-full"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+      <div className="relative flex overflow-hidden group">
+        {/* Gradientes laterales para suavizar la entrada y salida */}
+        <div className="absolute inset-y-0 left-0 w-20 md:w-40 z-10 bg-gradient-to-r from-inherit to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-20 md:w-40 z-10 bg-gradient-to-l from-inherit to-transparent pointer-events-none" />
+
+        <motion.div
+          className="flex flex-nowrap gap-12 md:gap-20 items-center"
+          animate={{
+            x: ["0%", "-50%"],
           }}
+          transition={{
+            duration: 20,
+            ease: "linear",
+            repeat: Infinity,
+          }}
+          // Pausa la animación cuando el usuario pone el mouse encima
+          whileHover={{ animationPlayState: "paused" }}
         >
-          <motion.div
-            className="flex flex-nowrap gap-1 md:gap-10 lg:gap-16 items-center py-10"
-            animate={controls}
-            drag="x"
-            dragConstraints={containerRef}
-            onDragStart={() => controls.stop()}
-            onDragEnd={() => startAnimation()}
-          >
-            {data.map((partner, index) => (
-              <div
-                key={`${partner.name}-${index}`}
-                className="relative w-28 h-12 md:w-36 md:h-14 flex-shrink-0"
-              >
-                {partner.logoUrl && (
-                  <Image
-                    src={partner.logoUrl} // Ya no necesitas el || "" porque el && asegura que existe
-                    alt={`Logo de ${partner.name}`}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 112px, 144px"
-                    loading="lazy"
-                  />
-                )}
-              </div>
-            ))}
-          </motion.div>
-        </div>
+          {duplicatedData.map((partner, index) => (
+            <div
+              key={`${partner.name}-${index}`}
+              className="relative w-10 sm:w-10 md:w-14 lg:w-30 h-12  md:h-16 flex-shrink-0"
+            >
+              {partner.logoUrl && (
+                <Image
+                  src={partner.logoUrl}
+                  alt={`Logo de ${partner.name}`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 128px, 160px"
+                />
+              )}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

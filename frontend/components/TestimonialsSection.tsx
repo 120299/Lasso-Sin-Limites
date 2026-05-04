@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { TitleSection } from "./TitleSection";
 import { Testimonial } from "@/types/strapi";
 import { TestimonialCard } from "./ui/TestimonialCard";
 import { CarouselDots } from "./ui/CarouselDots";
@@ -12,6 +10,7 @@ import { Section } from "./ui/Section";
 
 interface TestimonialsSectionProps {
   data: Testimonial[];
+  sectionId?: string;
   sectionTitle: string;
   sectionTitleColor?: string;
   sectionDescription: string;
@@ -20,6 +19,7 @@ interface TestimonialsSectionProps {
 
 export const TestimonialsSection = ({
   data,
+  sectionId,
   sectionTitle,
   sectionTitleColor,
   sectionDescription,
@@ -49,6 +49,7 @@ export const TestimonialsSection = ({
 
   return (
     <Section
+      sectionId={sectionId}
       sectionTitle={sectionTitle}
       sectionTitleColor={sectionTitleColor}
       sectionDescription={sectionDescription}

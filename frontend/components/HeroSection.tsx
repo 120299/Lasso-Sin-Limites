@@ -94,13 +94,13 @@ export const HeroSection = () => {
                 variant={"coral"}
                 className="px-10 h-14 rounded-2xl font-bold text-lg shadow-xl shadow-coral/20"
               >
-                Cotizar Proyecto
+                Asesoria Gratuita
               </Button>
               <Button
                 variant={"outline"}
                 className="px-10 h-14 rounded-2xl border-foreground/10 font-bold text-lg"
               >
-                Ver Portafolio
+                Casos de Éxito
               </Button>
             </div>
           </motion.div>

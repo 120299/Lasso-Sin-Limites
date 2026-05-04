@@ -38,7 +38,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding py-20">
+    <section id="contacto" className="section-padding py-20">
       <div className="container px-6 mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}

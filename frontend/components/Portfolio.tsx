@@ -14,6 +14,7 @@ const ITEMS_MOBILE = 3;
 
 interface PortfolioProps {
   data: Project[];
+  sectionId?: string;
   sectionTitle: string;
   sectionTitleColor?: string;
   sectionDescription: string;
@@ -22,6 +23,7 @@ interface PortfolioProps {
 
 export default function Portfolio({
   data: allProjects,
+  sectionId,
   sectionTitle,
   sectionTitleColor,
   sectionDescription,
@@ -66,6 +68,7 @@ export default function Portfolio({
 
   return (
     <Section
+      sectionId={sectionId}
       sectionTitle={sectionTitle}
       sectionTitleColor={sectionTitleColor}
       sectionDescription={sectionDescription}

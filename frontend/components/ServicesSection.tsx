@@ -5,6 +5,7 @@ import CategoryCard from "./ui/CategoryCard";
 
 interface ServicesSectionProps {
   data: Category[];
+  sectionId?: string;
   sectionTitle: string;
   sectionTitleColor?: string;
   sectionDescription: string;
@@ -12,6 +13,7 @@ interface ServicesSectionProps {
 }
 export default function ServicesSection({
   data,
+  sectionId,
   sectionTitle,
   sectionTitleColor,
   sectionDescription,
@@ -19,6 +21,7 @@ export default function ServicesSection({
 }: ServicesSectionProps) {
   return (
     <Section
+      sectionId={sectionId}
       sectionTitle={sectionTitle}
       sectionTitleColor={sectionTitleColor}
       sectionDescription={sectionDescription}

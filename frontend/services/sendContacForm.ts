@@ -3,7 +3,7 @@ import { ContactFormData } from "@/lib/validations";
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
 
-export const sendContactForm = async (formData: ContactFormData) => {
+export async function sendContactForm(formData: ContactFormData) {
   // 1. Creamos y formateamos la fecha actual
   const hoy = new Date();
   const dia = String(hoy.getDate()).padStart(2, "0");
@@ -36,4 +36,4 @@ export const sendContactForm = async (formData: ContactFormData) => {
   }
 
   return await response.json();
-};
+}
