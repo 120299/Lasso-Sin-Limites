@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { TitleSection } from "./TitleSection";
 import { Project } from "@/types/strapi";
 import { ProjectCard } from "./ui/ProjectCard";
 import { ProjectModal } from "./ui/ProjectModal";

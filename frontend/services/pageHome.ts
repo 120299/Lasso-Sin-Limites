@@ -30,9 +30,7 @@ export async function getHomePage() {
     },
   );
 
-  // El tag "home-page" es el que limpiará nuestro Webhook
   const res = await strapiFetch(`/api/home-page?${query}`, "home-page");
 
-  // Al poner : Stack aquí, TypeScript sabe que devuelves una lista de Stacks
   return res?.data;
 }

@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono, Sora } from "next/font/google";
+import { Header } from "@/components/Header";
+import { getMenuPrimary } from "@/services/menuPrimary";
+
+const menuPrimary = await getMenuPrimary();
+
+console.log(menuPrimary);
+
+import "../globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+export const metadata: Metadata = {
+  title: "Lasso Sin Límites",
+  description: "La mejor agencia publicitaria de valencia",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="es">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
+      >
+        <div className="min-h-screen bg-background">{children}</div>
+      </body>
+    </html>
+  );
+}

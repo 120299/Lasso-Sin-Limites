@@ -3,10 +3,7 @@ import { STRAPI_URL } from "@/config/api";
 export async function strapiFetch(path: string, tag: string) {
   try {
     const response = await fetch(`${STRAPI_URL}${path}`, {
-      next: { tags: [tag] }, // Next.js servirá esto desde caché hasta que el tag sea invalidado[cite: 2]
-      headers: {
-        "Content-Type": "application/json",
-      },
+      next: { tags: [tag] },
     });
 
     if (!response.ok) {

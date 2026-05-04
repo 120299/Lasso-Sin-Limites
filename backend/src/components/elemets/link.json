@@ -1,16 +1,20 @@
 {
   "collectionName": "components_elemets_links",
   "info": {
-    "displayName": "Link",
+    "displayName": "nav-item",
     "icon": "bulletList"
   },
   "options": {},
   "attributes": {
+    "key": {
+      "type": "string",
+      "required": true
+    },
     "label": {
       "type": "string",
       "required": true
     },
-    "hrf": {
+    "href": {
       "type": "string",
       "required": true
     }

@@ -3,17 +3,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { navItems } from "@/data/data";
 import { Button } from "./ui/button";
 import { Globe, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MenuPrimary } from "@/types/strapi";
 
-export const Header = () => {
+interface HeaderProps {
+  data: MenuPrimary[];
+}
+
+export const Header = ({ data }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
   const pathname = usePathname();
-
+  console.log(data);
+  const navItems = data;
   const language: string = "es";
 
   // Control de hash para navegación interna (#servicios, #contacto, etc.)

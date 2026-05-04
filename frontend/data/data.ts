@@ -22,7 +22,7 @@ type NavItem = {
 };
 
 export const navItems: NavItem[] = [
-  { key: "nav.home", href: "#", label: "Inicio" },
+  { key: "nav.inicio", href: "#", label: "Inicio" },
   { key: "nav.services", href: "#servicios", label: "Servicios" },
   { key: "nav.features", href: "#features", label: "Por qué nosotros" },
   { key: "nav.stats", href: "#tecnologias", label: "Tecnologías" },

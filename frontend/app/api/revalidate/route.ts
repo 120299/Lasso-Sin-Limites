@@ -19,9 +19,9 @@ export async function POST(request: Request) {
     category: "categories",
     project: "projects",
     testimonial: "testimonials",
-    home_page: "home-page",
+    "home-page": "home-page",
     partner: "partners",
-    menuPrimary: "menuPrimary",
+    "menu-primary": "menu-primary",
   };
 
   const tagToInvalidate = tagsMap[model];
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
   if (tagToInvalidate) {
     // Usamos "max" para asegurar una limpieza total según tu versión de Next.js[cite: 4]
     revalidateTag(tagToInvalidate, "max");
+    console.log("Si funciona", tagToInvalidate);
     return NextResponse.json({ revalidated: true, tag: tagToInvalidate });
   }
 

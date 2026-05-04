@@ -16,80 +16,107 @@ import { getProjects } from "@/services/projects";
 import { getTestimonials } from "@/services/testimonials";
 import { getHomePage } from "@/services/pageHome";
 import { getPartners } from "@/services/partners";
-
 import { getMenuPrimary } from "@/services/menuPrimary";
 
-const menuPrimary = await getMenuPrimary();
-
-console.log(menuPrimary);
-
-// Forzar a que la página no sea estática
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 export default async function Home() {
-  const listStacks = await getStacks();
-  const listCategoris = await getCategories();
-  const listProjects = await getProjects();
-  const listTestimonials = await getTestimonials();
-  const listPartners = await getPartners();
-  const dataHomePage = await getHomePage();
+  // Ejecutar promesas en paralelo para mejor rendimiento
+  const [
+    listStacks,
+    listCategoris,
+    listProjects,
+    listTestimonials,
+    listPartners,
+    menuPrimary,
+    dataHomePage,
+  ] = await Promise.all([
+    getStacks(),
+    getCategories(),
+    getProjects(),
+    getTestimonials(),
+    getPartners(),
+    getMenuPrimary(),
+    getHomePage(),
+  ]);
+
+  // 1. Validación crítica: Si no hay dataHomePage o sections, mostramos un fallback
+  if (!dataHomePage || !dataHomePage.sections) {
+    console.error("Error: dataHomePage o dataHomePage.sections es undefined");
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p>Error cargando la configuración de la página.</p>
+      </div>
+    );
+  }
+
+  // Función auxiliar para obtener secciones de forma segura
+  const getSection = (index: number) => {
+    return (
+      dataHomePage.sections[index] || { title: "", content: "", items: [] }
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header data={menuPrimary} />
       <main>
         <HeroSection />
+
         <LogosSection
           title="Empresas que han trabajado con nosotros"
           data={listPartners}
           background="bg-gray-100"
         />
+
         <ServicesSection
           sectionId="servicios"
-          sectionTitle={dataHomePage.sections[0].title}
+          sectionTitle={getSection(0).title}
           sectionTitleColor="text-gradient"
-          sectionDescription={dataHomePage.sections[0].content}
+          sectionDescription={getSection(0).content}
           sectionBackground="bg-white-100"
           data={listCategoris}
         />
+
         <Portfolio
           sectionId="portfolio"
-          sectionTitle={dataHomePage.sections[5].title}
+          sectionTitle={getSection(5).title}
           sectionTitleColor="text-white"
-          sectionDescription={dataHomePage.sections[5].content}
+          sectionDescription={getSection(5).content}
           sectionBackground="bg-slate-950"
           data={listProjects}
         />
+
         <LogosSection
           title="Nuestro Stack Tecnológico"
           data={listStacks}
           background="bg-gray-100"
         />
+
         <StatsSection
           sectionId="experiencia"
-          sectionTitle={dataHomePage.sections[3].title}
+          sectionTitle={getSection(3).title}
           sectionTitleColor="text-white"
-          sectionDescription={dataHomePage.sections[3].content}
+          sectionDescription={getSection(3).content}
           sectionBackground="bg-slate-950"
-          data={dataHomePage.sections[4].items}
+          data={getSection(4).items}
         />
+
         <FeaturesSection
-          sectionTitle={dataHomePage.sections[1].title}
+          sectionTitle={getSection(1).title}
           sectionTitleColor="text-gradient"
-          sectionDescription={dataHomePage.sections[1].content}
+          sectionDescription={getSection(1).content}
           sectionBackground="bg-white-100"
-          data={dataHomePage.sections[2].items}
+          data={getSection(2).items}
         />
 
         <TestimonialsSection
           sectionId="testimonios"
-          sectionTitle={dataHomePage.sections[6].title}
+          sectionTitle={getSection(6).title}
           sectionTitleColor="text-white"
-          sectionDescription={dataHomePage.sections[6].content}
+          sectionDescription={getSection(6).content}
           sectionBackground="bg-slate-950"
           data={listTestimonials}
         />
+
         <ContactSection />
       </main>
       <Footer />

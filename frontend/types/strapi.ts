@@ -69,6 +69,7 @@ export interface Stat {
 }
 
 export interface MenuPrimary {
-  label: string;
+  key: string;
   href: string;
+  label: string;
 }

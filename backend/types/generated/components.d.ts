@@ -3,11 +3,12 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface ElemetsLink extends Struct.ComponentSchema {
   collectionName: 'components_elemets_links';
   info: {
-    displayName: 'Link';
+    displayName: 'nav-item';
     icon: 'bulletList';
   };
   attributes: {
-    hrf: Schema.Attribute.String & Schema.Attribute.Required;
+    href: Schema.Attribute.String & Schema.Attribute.Required;
+    key: Schema.Attribute.String & Schema.Attribute.Required;
     label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
