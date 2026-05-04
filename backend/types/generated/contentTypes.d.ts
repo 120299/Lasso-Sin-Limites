@@ -621,6 +621,34 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMenuPrimaryMenuPrimary extends Struct.SingleTypeSchema {
+  collectionName: 'menu_primaries';
+  info: {
+    displayName: 'Menu Primary';
+    pluralName: 'menu-primaries';
+    singularName: 'menu-primary';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::menu-primary.menu-primary'
+    > &
+      Schema.Attribute.Private;
+    Menuitems: Schema.Attribute.Component<'elemets.link', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   collectionName: 'partners';
   info: {
@@ -1341,6 +1369,7 @@ declare module '@strapi/strapi' {
       'api::country.country': ApiCountryCountry;
       'api::customer.customer': ApiCustomerCustomer;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::menu-primary.menu-primary': ApiMenuPrimaryMenuPrimary;
       'api::partner.partner': ApiPartnerPartner;
       'api::project.project': ApiProjectProject;
       'api::quote.quote': ApiQuoteQuote;

@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "menu_primaries",
+  "info": {
+    "singularName": "menu-primary",
+    "pluralName": "menu-primaries",
+    "displayName": "Menu Primary"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Menuitems": {
+      "type": "component",
+      "component": "elemets.link",
+      "repeatable": true
+    }
+  }
+}

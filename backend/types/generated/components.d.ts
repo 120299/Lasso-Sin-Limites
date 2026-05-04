@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElemetsLink extends Struct.ComponentSchema {
+  collectionName: 'components_elemets_links';
+  info: {
+    displayName: 'Link';
+    icon: 'bulletList';
+  };
+  attributes: {
+    hrf: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElemetsListFeature extends Struct.ComponentSchema {
   collectionName: 'components_elemets_list_features';
   info: {
@@ -67,6 +79,7 @@ export interface LayoutTitleSection extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elemets.link': ElemetsLink;
       'elemets.list-feature': ElemetsListFeature;
       'elemets.list-stats': ElemetsListStats;
       'layout.feature': LayoutFeature;
