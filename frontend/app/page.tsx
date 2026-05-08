@@ -1,7 +1,6 @@
 import { ContactSection } from "@/components/ContactSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { LogosSection } from "@/components/LogosSection";
 import Portfolio from "@/components/Portfolio";
@@ -16,16 +15,7 @@ import { getProjects } from "@/services/projects";
 import { getTestimonials } from "@/services/testimonials";
 import { getHomePage } from "@/services/pageHome";
 import { getPartners } from "@/services/partners";
-
 import { getMenuPrimary } from "@/services/menuPrimary";
-
-const menuPrimary = await getMenuPrimary();
-
-console.log(menuPrimary);
-
-// Forzar a que la página no sea estática
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export default async function Home() {
   const listStacks = await getStacks();
@@ -36,8 +26,7 @@ export default async function Home() {
   const dataHomePage = await getHomePage();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header data={menuPrimary} />
+    <>
       <main>
         <HeroSection />
         <LogosSection
@@ -93,6 +82,6 @@ export default async function Home() {
         <ContactSection />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

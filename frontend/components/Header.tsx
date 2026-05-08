@@ -53,15 +53,13 @@ export const Header = ({ data }: HeaderProps) => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border"
-      >
+        className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* LOGO */}
             <motion.a
               href="#"
-              className="text-2xl font-bold text-foreground font-sora"
-            >
+              className="text-2xl font-bold text-foreground font-sora">
               <span className="text-gradient">Lasso Sin Límites</span>
             </motion.a>
 
@@ -84,8 +82,7 @@ export const Header = ({ data }: HeaderProps) => {
                     transition={{ delay: index * 0.1 }}
                     onClick={() => {
                       if (item.href.startsWith("#")) setActiveHash(item.href);
-                    }}
-                  >
+                    }}>
                     {item.label}
 
                     {/* Indicador inferior animado */}
@@ -112,8 +109,7 @@ export const Header = ({ data }: HeaderProps) => {
                   variant="ghost"
                   size={"sm"}
                   className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                  onClick={() => setLangOpen(!langOpen)}
-                >
+                  onClick={() => setLangOpen(!langOpen)}>
                   <Globe className="size-4" />
                   <span>{language}</span>
                 </Button>
@@ -123,8 +119,7 @@ export const Header = ({ data }: HeaderProps) => {
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-2 py-2 w-32 bg-card rounded-lg shadow-lg border border-border overflow-hidden"
-                    >
+                      className="absolute right-0 mt-2 py-2 w-32 bg-card rounded-lg shadow-lg border border-border overflow-hidden">
                       <button
                         onClick={() => setLangOpen(false)}
                         className={cn(
@@ -132,8 +127,7 @@ export const Header = ({ data }: HeaderProps) => {
                           language === "es"
                             ? "text-primary font-medium"
                             : "text-foreground",
-                        )}
-                      >
+                        )}>
                         🇪🇸 Español
                       </button>
                       <button
@@ -143,8 +137,7 @@ export const Header = ({ data }: HeaderProps) => {
                           language === "en"
                             ? "text-primary font-medium"
                             : "text-foreground",
-                        )}
-                      >
+                        )}>
                         🇺🇸 English
                       </button>
                     </motion.div>
@@ -154,15 +147,14 @@ export const Header = ({ data }: HeaderProps) => {
 
               {/* Download Button */}
               <Button variant={"default"} className="hidden lg:flex">
-                Descargar
+                WhastApp
               </Button>
 
               <Button
                 variant={"ghost"}
                 size={"icon"}
                 className="lg:hidden"
-                onClick={() => setIsOpen(!isOpen)}
-              >
+                onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? (
                   <X className="size-5" />
                 ) : (
@@ -180,8 +172,7 @@ export const Header = ({ data }: HeaderProps) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-card border-t border-border overflow-hidden"
-            >
+              className="lg:hidden bg-card border-t border-border overflow-hidden">
               <nav className="container px-4 py-4 flex flex-col gap-2">
                 {navItems.map((item) => {
                   const isActive = checkActive(item.href);
@@ -198,8 +189,7 @@ export const Header = ({ data }: HeaderProps) => {
                         isActive
                           ? "bg-primary/10 text-primary font-semibold"
                           : "text-foreground hover:bg-muted",
-                      )}
-                    >
+                      )}>
                       {item.label}
                     </a>
                   );

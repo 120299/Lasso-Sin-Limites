@@ -114,7 +114,7 @@ export const Footer = () => {
           viewport={{ once: true }}
           className="pt-8 border-t border-background/10 text-center text-background/50 text-sm"
         >
-          &copy; {new Date().getFullYear()} Finova. Todos los derechos
+          &copy; {new Date().getFullYear()} Lasso Sin Límites Todos los derechos
           reservados.
         </motion.div>
       </div>

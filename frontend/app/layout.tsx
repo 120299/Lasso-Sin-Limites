@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
-
+import { Header } from "@/components/Header";
 import "./globals.css";
+// Strapi Data
+import { getMenuPrimary } from "@/services/menuPrimary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,17 +26,20 @@ export const metadata: Metadata = {
   description: "La mejor agencia publicitaria de valencia",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const menuPrimary = await getMenuPrimary();
   return (
     <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}
-      >
-        {children}
+        className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} antialiased`}>
+        <div className="min-h-screen bg-background">
+          <Header data={menuPrimary} />
+          {children}
+        </div>
       </body>
     </html>
   );
