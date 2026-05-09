@@ -1,6 +1,7 @@
 import qs from "qs";
 import { strapiFetch } from "@/lib/strapi-client";
 import { formatAssetUrl } from "@/config/api";
+import { Category } from "@/types/strapi";
 
 export async function getCategories() {
   const query = qs.stringify({
