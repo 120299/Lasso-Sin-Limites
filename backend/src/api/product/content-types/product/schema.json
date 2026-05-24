@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Products"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "stock": {
+      "type": "decimal"
+    },
+    "features": {
+      "type": "component",
+      "component": "elemets.feature-item",
+      "repeatable": true
+    },
+    "productType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "plan_or_service, physical, digital"
+      ]
+    },
+    "billingPeriod": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "single_paymnet, monthly, annual"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    }
+  }
+}

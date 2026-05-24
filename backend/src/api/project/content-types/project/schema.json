@@ -4,7 +4,7 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "Project"
+    "displayName": "Projects"
   },
   "options": {
     "draftAndPublish": true
@@ -43,9 +43,12 @@
       "type": "date",
       "required": true
     },
-    "url": {
+    "liveUrl": {
       "type": "string",
       "required": false
+    },
+    "githubUrl": {
+      "type": "string"
     },
     "content_media": {
       "type": "media",
@@ -57,19 +60,27 @@
         "audios"
       ]
     },
-    "description": {
-      "type": "text",
-      "required": true
-    },
-    "status_project": {
-      "type": "boolean",
-      "default": true
-    },
     "stacks": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::stack.stack",
       "inversedBy": "projects"
+    },
+    "showCompany": {
+      "type": "boolean",
+      "required": true
+    },
+    "showPortfolio": {
+      "type": "boolean",
+      "required": true
+    },
+    "textCompany": {
+      "type": "blocks",
+      "required": true
+    },
+    "textPortfolio": {
+      "type": "blocks",
+      "required": true
     }
   }
 }

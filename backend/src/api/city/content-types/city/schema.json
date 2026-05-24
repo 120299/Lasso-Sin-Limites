@@ -4,7 +4,7 @@
   "info": {
     "singularName": "city",
     "pluralName": "cities",
-    "displayName": "City"
+    "displayName": "Cities"
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "country": {
       "type": "relation",
@@ -24,6 +25,18 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::customer.customer",
+      "mappedBy": "city"
+    },
+    "work_experience": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-experience.work-experience",
+      "mappedBy": "city"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event",
       "mappedBy": "city"
     }
   }

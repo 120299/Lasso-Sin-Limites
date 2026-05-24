@@ -1,5 +1,36 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElemetsDocumentRow extends Struct.ComponentSchema {
+  collectionName: 'components_elemets_document_rows';
+  info: {
+    displayName: 'document-row';
+    icon: 'priceTag';
+  };
+  attributes: {
+    concept: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    frozenFeatures: Schema.Attribute.Component<'elemets.feature-item', true> &
+      Schema.Attribute.Required;
+    quantity: Schema.Attribute.Integer & Schema.Attribute.Required;
+    subtotal: Schema.Attribute.String & Schema.Attribute.Required;
+    unitPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+  };
+}
+
+export interface ElemetsFeatureItem extends Struct.ComponentSchema {
+  collectionName: 'components_elemets_feature_items';
+  info: {
+    displayName: 'feature-item';
+    icon: 'bulletList';
+  };
+  attributes: {
+    featureText: Schema.Attribute.String & Schema.Attribute.Required;
+    isIncluded: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+  };
+}
+
 export interface ElemetsLink extends Struct.ComponentSchema {
   collectionName: 'components_elemets_links';
   info: {
@@ -80,6 +111,8 @@ export interface LayoutTitleSection extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elemets.document-row': ElemetsDocumentRow;
+      'elemets.feature-item': ElemetsFeatureItem;
       'elemets.link': ElemetsLink;
       'elemets.list-feature': ElemetsListFeature;
       'elemets.list-stats': ElemetsListStats;

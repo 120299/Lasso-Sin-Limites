@@ -1,33 +1,33 @@
 {
   "kind": "collectionType",
-  "collectionName": "countries",
+  "collectionName": "events",
   "info": {
-    "singularName": "country",
-    "pluralName": "countries",
-    "displayName": "Countries"
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Events"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "iva": {
-      "type": "string",
+    "description": {
+      "type": "text",
       "required": true
     },
-    "symbol": {
-      "type": "string",
+    "eventDate": {
+      "type": "date",
       "required": true
     },
-    "cities": {
+    "city": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::city.city",
-      "mappedBy": "country"
+      "inversedBy": "events"
     }
   }
 }

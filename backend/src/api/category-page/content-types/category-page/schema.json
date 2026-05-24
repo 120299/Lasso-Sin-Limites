@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "category_pages",
+  "info": {
+    "singularName": "category-page",
+    "pluralName": "category-pages",
+    "displayName": "Category Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "texto": {
+      "type": "blocks"
+    }
+  }
+}

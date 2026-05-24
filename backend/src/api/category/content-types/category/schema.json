@@ -4,15 +4,20 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Category"
+    "displayName": "Categories"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "name": {
       "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
       "required": true
     },
     "description": {
@@ -22,7 +27,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -30,25 +35,33 @@
     "video": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "videos"
       ]
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
-    "services": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::service.service",
-      "inversedBy": "categories"
     },
     "projects": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::project.project",
+      "mappedBy": "category"
+    },
+    "ShowBlog": {
+      "type": "boolean",
+      "required": true
+    },
+    "showProduct": {
+      "type": "boolean",
+      "required": true
+    },
+    "showPortfolio": {
+      "type": "boolean",
+      "required": true
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.blog",
       "mappedBy": "category"
     }
   }

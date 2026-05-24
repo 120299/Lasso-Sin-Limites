@@ -430,12 +430,80 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
   info: {
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
+    displayName: 'Blog';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    budgets: Schema.Attribute.Relation<'manyToMany', 'api::budget.budget'>;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    publishedDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    textCompany: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    textPortfolio: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBudgetBudget extends Struct.CollectionTypeSchema {
+  collectionName: 'budgets';
+  info: {
+    displayName: 'Budgets';
+    pluralName: 'budgets';
+    singularName: 'budget';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    createdDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
+    frozenTaxRate: Schema.Attribute.Integer & Schema.Attribute.Required;
+    grossTotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::budget.budget'
+    > &
+      Schema.Attribute.Private;
+    netTotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    status_budget: Schema.Attribute.Enumeration<
+      ['draft, sent, accepeted, rejected']
+    > &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryPageCategoryPage extends Struct.SingleTypeSchema {
+  collectionName: 'category_pages';
+  info: {
+    displayName: 'Category Page';
+    pluralName: 'category-pages';
+    singularName: 'category-page';
   };
   options: {
     draftAndPublish: true;
@@ -444,30 +512,94 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category-page.category-page'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    texto: Schema.Attribute.Blocks;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    displayName: 'Categories';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
     description: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::category.category'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
-    slug: Schema.Attribute.UID<'title'>;
+    ShowBlog: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    showPortfolio: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    showProduct: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos'>;
+  };
+}
+
+export interface ApiCertificationCertification
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'certifications';
+  info: {
+    displayName: 'Certifications';
+    pluralName: 'certifications';
+    singularName: 'certification';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    issueDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    issuer: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::certification.certification'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    video: Schema.Attribute.Media<'videos'> & Schema.Attribute.Required;
+    verificationId: Schema.Attribute.String;
   };
 }
 
 export interface ApiCityCity extends Struct.CollectionTypeSchema {
   collectionName: 'cities';
   info: {
-    displayName: 'City';
+    displayName: 'Cities';
     pluralName: 'cities';
     singularName: 'city';
   };
@@ -480,14 +612,19 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     customers: Schema.Attribute.Relation<'oneToMany', 'api::customer.customer'>;
+    events: Schema.Attribute.Relation<'oneToMany', 'api::event.event'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::city.city'> &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    work_experience: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-experience.work-experience'
+    >;
   };
 }
 
@@ -528,7 +665,7 @@ export interface ApiContactFormContactForm extends Struct.CollectionTypeSchema {
 export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   collectionName: 'countries';
   info: {
-    displayName: 'Country';
+    displayName: 'Countries';
     pluralName: 'countries';
     singularName: 'country';
   };
@@ -559,7 +696,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
 export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
   collectionName: 'customers';
   info: {
-    displayName: 'Customer';
+    displayName: 'Customers';
     pluralName: 'customers';
     singularName: 'customer';
   };
@@ -568,6 +705,8 @@ export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
   };
   attributes: {
     address: Schema.Attribute.String & Schema.Attribute.Required;
+    budgets: Schema.Attribute.Relation<'oneToMany', 'api::budget.budget'> &
+      Schema.Attribute.Private;
     city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -584,7 +723,73 @@ export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
     phone: Schema.Attribute.String & Schema.Attribute.Required;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    quotes: Schema.Attribute.Relation<'oneToMany', 'api::quote.quote'>;
+    taxId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiDegreeDegree extends Struct.CollectionTypeSchema {
+  collectionName: 'degrees';
+  info: {
+    displayName: 'Degrees';
+    pluralName: 'degrees';
+    singularName: 'degree';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    endDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    institution: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::degree.degree'
+    > &
+      Schema.Attribute.Private;
+    officialDegree: Schema.Attribute.String & Schema.Attribute.Required;
+    pdfCredential: Schema.Attribute.Media<'files', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Struct.CollectionTypeSchema {
+  collectionName: 'events';
+  info: {
+    displayName: 'Events';
+    pluralName: 'events';
+    singularName: 'event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    eventDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -678,10 +883,51 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductProduct extends Struct.CollectionTypeSchema {
+  collectionName: 'products';
+  info: {
+    displayName: 'Products';
+    pluralName: 'products';
+    singularName: 'product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    billingPeriod: Schema.Attribute.Enumeration<
+      ['single_paymnet, monthly, annual']
+    > &
+      Schema.Attribute.Required;
+    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    features: Schema.Attribute.Component<'elemets.feature-item', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    productType: Schema.Attribute.Enumeration<
+      ['plan_or_service, physical, digital']
+    > &
+      Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    stock: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
-    displayName: 'Project';
+    displayName: 'Projects';
     pluralName: 'projects';
     singularName: 'project';
   };
@@ -699,8 +945,9 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    githubUrl: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    liveUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -709,76 +956,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    showCompany: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    showPortfolio: Schema.Attribute.Boolean & Schema.Attribute.Required;
     slug: Schema.Attribute.UID<'name'>;
     stacks: Schema.Attribute.Relation<'manyToMany', 'api::stack.stack'>;
-    status_project: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    url: Schema.Attribute.String;
-  };
-}
-
-export interface ApiQuoteQuote extends Struct.CollectionTypeSchema {
-  collectionName: 'quotes';
-  info: {
-    displayName: 'Quote';
-    pluralName: 'quotes';
-    singularName: 'quote';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
-    date_create: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::quote.quote'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
-    status_quote: Schema.Attribute.Enumeration<
-      ['Borrador,', 'Enviado,', 'Aceptado, ', 'Rechazado,']
-    > &
-      Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiServiceService extends Struct.CollectionTypeSchema {
-  collectionName: 'services';
-  info: {
-    displayName: 'Service';
-    pluralName: 'services';
-    singularName: 'service';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.String & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service.service'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    quotes: Schema.Attribute.Relation<'manyToMany', 'api::quote.quote'>;
+    textCompany: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    textPortfolio: Schema.Attribute.Blocks & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -788,7 +971,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
 export interface ApiStackStack extends Struct.CollectionTypeSchema {
   collectionName: 'stacks';
   info: {
-    displayName: 'Stack';
+    displayName: 'Stacks';
     pluralName: 'stacks';
     singularName: 'stack';
   };
@@ -806,9 +989,19 @@ export interface ApiStackStack extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
+    techType: Schema.Attribute.Enumeration<
+      [
+        'frontend_development, backend_architecture, mobile_development, databases_storage, design_branding_ui, devops_infrastructure, multimedia_production',
+      ]
+    > &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    work_experiences: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::work-experience.work-experience'
+    >;
   };
 }
 
@@ -846,6 +1039,44 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWorkExperienceWorkExperience
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'work_experiences';
+  info: {
+    displayName: 'Work-experience';
+    pluralName: 'work-experiences';
+    singularName: 'work-experience';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
+    company: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    endDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    isCurrentJob: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    jobDescription: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-experience.work-experience'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String & Schema.Attribute.Required;
+    stacks: Schema.Attribute.Relation<'manyToMany', 'api::stack.stack'>;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1308,7 +1539,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1317,6 +1547,7 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    customer: Schema.Attribute.Relation<'oneToOne', 'api::customer.customer'>;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1363,19 +1594,25 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::blog.blog': ApiBlogBlog;
+      'api::budget.budget': ApiBudgetBudget;
+      'api::category-page.category-page': ApiCategoryPageCategoryPage;
       'api::category.category': ApiCategoryCategory;
+      'api::certification.certification': ApiCertificationCertification;
       'api::city.city': ApiCityCity;
       'api::contact-form.contact-form': ApiContactFormContactForm;
       'api::country.country': ApiCountryCountry;
       'api::customer.customer': ApiCustomerCustomer;
+      'api::degree.degree': ApiDegreeDegree;
+      'api::event.event': ApiEventEvent;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::menu-primary.menu-primary': ApiMenuPrimaryMenuPrimary;
       'api::partner.partner': ApiPartnerPartner;
+      'api::product.product': ApiProductProduct;
       'api::project.project': ApiProjectProject;
-      'api::quote.quote': ApiQuoteQuote;
-      'api::service.service': ApiServiceService;
       'api::stack.stack': ApiStackStack;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
+      'api::work-experience.work-experience': ApiWorkExperienceWorkExperience;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

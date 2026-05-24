@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_elemets_document_rows",
+  "info": {
+    "displayName": "document-row",
+    "icon": "priceTag"
+  },
+  "options": {},
+  "attributes": {
+    "concept": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "unitPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "subtotal": {
+      "type": "string",
+      "required": true
+    },
+    "frozenFeatures": {
+      "type": "component",
+      "component": "elemets.feature-item",
+      "repeatable": true,
+      "required": true
+    }
+  },
+  "config": {}
+}

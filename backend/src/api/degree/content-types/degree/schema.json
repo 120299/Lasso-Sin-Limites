@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "degrees",
+  "info": {
+    "singularName": "degree",
+    "pluralName": "degrees",
+    "displayName": "Degrees"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "institution": {
+      "type": "string",
+      "required": true
+    },
+    "officialDegree": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "pdfCredential": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  }
+}

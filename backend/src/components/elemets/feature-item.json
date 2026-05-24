@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_elemets_feature_items",
+  "info": {
+    "displayName": "feature-item",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "featureText": {
+      "type": "string",
+      "required": true
+    },
+    "isIncluded": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "config": {}
+}

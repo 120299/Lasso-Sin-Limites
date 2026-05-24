@@ -4,7 +4,7 @@
   "info": {
     "singularName": "customer",
     "pluralName": "customers",
-    "displayName": "Customer"
+    "displayName": "Customers"
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +18,11 @@
     "name_company": {
       "type": "string",
       "required": true
+    },
+    "taxId": {
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "email": {
       "type": "email",
@@ -43,10 +48,17 @@
       "target": "api::project.project",
       "mappedBy": "customer"
     },
-    "quotes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "customer"
+    },
+    "budgets": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::quote.quote",
+      "target": "api::budget.budget",
+      "private": true,
       "mappedBy": "customer"
     }
   }

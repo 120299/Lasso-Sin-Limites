@@ -4,7 +4,7 @@
   "info": {
     "singularName": "stack",
     "pluralName": "stacks",
-    "displayName": "Stack"
+    "displayName": "Stacks"
   },
   "options": {
     "draftAndPublish": true
@@ -23,10 +23,23 @@
         "images"
       ]
     },
+    "techType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "frontend_development, backend_architecture, mobile_development, databases_storage, design_branding_ui, devops_infrastructure, multimedia_production"
+      ]
+    },
     "projects": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::project.project",
+      "mappedBy": "stacks"
+    },
+    "work_experiences": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::work-experience.work-experience",
       "mappedBy": "stacks"
     }
   }

@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "budgets",
+  "info": {
+    "singularName": "budget",
+    "pluralName": "budgets",
+    "displayName": "Budgets"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "createdDate": {
+      "type": "date",
+      "required": true
+    },
+    "frozenTaxRate": {
+      "type": "integer",
+      "required": true
+    },
+    "netTotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "grossTotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "status_budget": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "draft, sent, accepeted, rejected"
+      ]
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "budgets"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "budgets"
+    }
+  }
+}
