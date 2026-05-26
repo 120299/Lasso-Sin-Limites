@@ -27,7 +27,13 @@
       "type": "enumeration",
       "required": true,
       "enum": [
-        "frontend_development, backend_architecture, mobile_development, databases_storage, design_branding_ui, devops_infrastructure, multimedia_production"
+        "frontend_development",
+        "backend_architecture",
+        "mobile_development",
+        "databases_storage",
+        "design_branding_ui",
+        "devops_infrastructure",
+        "multimedia_production"
       ]
     },
     "projects": {

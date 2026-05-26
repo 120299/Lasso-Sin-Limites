@@ -31,7 +31,10 @@
       "type": "enumeration",
       "required": true,
       "enum": [
-        "draft, sent, accepeted, rejected"
+        "draft",
+        "sent",
+        "accepeted",
+        "rejected"
       ]
     },
     "customer": {

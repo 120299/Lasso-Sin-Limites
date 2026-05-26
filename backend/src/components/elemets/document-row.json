@@ -6,31 +6,21 @@
   },
   "options": {},
   "attributes": {
-    "concept": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "unitPrice": {
-      "type": "decimal",
-      "required": true
-    },
     "quantity": {
       "type": "integer",
       "required": true
+    },
+    "negotiatedPrice": {
+      "type": "decimal"
     },
     "subtotal": {
       "type": "string",
       "required": true
     },
-    "frozenFeatures": {
-      "type": "component",
-      "component": "elemets.feature-item",
-      "repeatable": true,
-      "required": true
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
     }
   },
   "config": {}

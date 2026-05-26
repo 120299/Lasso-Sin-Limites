@@ -7,13 +7,10 @@ export interface ElemetsDocumentRow extends Struct.ComponentSchema {
     icon: 'priceTag';
   };
   attributes: {
-    concept: Schema.Attribute.String & Schema.Attribute.Required;
-    description: Schema.Attribute.String & Schema.Attribute.Required;
-    frozenFeatures: Schema.Attribute.Component<'elemets.feature-item', true> &
-      Schema.Attribute.Required;
+    negotiatedPrice: Schema.Attribute.Decimal;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
     quantity: Schema.Attribute.Integer & Schema.Attribute.Required;
     subtotal: Schema.Attribute.String & Schema.Attribute.Required;
-    unitPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
   };
 }
 

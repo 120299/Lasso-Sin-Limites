@@ -36,14 +36,18 @@
       "type": "enumeration",
       "required": true,
       "enum": [
-        "plan_or_service, physical, digital"
+        "plan_or_service",
+        "physical",
+        "digital"
       ]
     },
     "billingPeriod": {
       "type": "enumeration",
       "required": true,
       "enum": [
-        "single_paymnet, monthly, annual"
+        "single_paymnet",
+        "monthly",
+        "annual"
       ]
     },
     "category": {

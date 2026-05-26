@@ -489,7 +489,7 @@ export interface ApiBudgetBudget extends Struct.CollectionTypeSchema {
     netTotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     status_budget: Schema.Attribute.Enumeration<
-      ['draft, sent, accepeted, rejected']
+      ['draft', 'sent', 'accepeted', 'rejected']
     > &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -895,7 +895,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     billingPeriod: Schema.Attribute.Enumeration<
-      ['single_paymnet, monthly, annual']
+      ['single_paymnet', 'monthly', 'annual']
     > &
       Schema.Attribute.Required;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
@@ -912,7 +912,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal & Schema.Attribute.Required;
     productType: Schema.Attribute.Enumeration<
-      ['plan_or_service, physical, digital']
+      ['plan_or_service', 'physical', 'digital']
     > &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
@@ -991,7 +991,13 @@ export interface ApiStackStack extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     techType: Schema.Attribute.Enumeration<
       [
-        'frontend_development, backend_architecture, mobile_development, databases_storage, design_branding_ui, devops_infrastructure, multimedia_production',
+        'frontend_development',
+        'backend_architecture',
+        'mobile_development',
+        'databases_storage',
+        'design_branding_ui',
+        'devops_infrastructure',
+        'multimedia_production',
       ]
     > &
       Schema.Attribute.Required;
